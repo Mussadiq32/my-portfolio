@@ -1,0 +1,2925 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mussadiq Wani's Portfolio</title>
+    <link rel="stylesheet" href="assets/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/newcss.css" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      /* Custom Cursor */
+      body {
+        cursor: none;
+      }
+
+      .cursor-outer {
+        width: 30px;
+        height: 30px;
+        border: 2px solid rgba(76, 175, 80, 0.5);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: all 0.2s ease;
+        transform: translate(-50%, -50%);
+      }
+
+      .cursor-inner {
+        width: 8px;
+        height: 8px;
+        background: var(--first-color);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: all 0.1s ease;
+        transform: translate(-50%, -50%);
+      }
+
+      /* Hide cursor on mobile */
+      @media (max-width: 768px) {
+        .cursor-outer, .cursor-inner {
+          display: none;
+        }
+        body {
+          cursor: auto;
+        }
+      }
+
+      /* Animated Icons */
+      .section__title i {
+        display: inline-block;
+        margin-right: 10px;
+        animation: iconFloat 3s ease-in-out infinite;
+      }
+
+      /* Hover Effects */
+      .nav__link:hover i {
+        animation: iconShake 0.5s ease;
+      }
+
+      .button:hover i {
+        animation: iconPulse 1s infinite;
+      }
+
+      /* Animations */
+      @keyframes iconFloat {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes iconShake {
+        0%, 100% {
+          transform: rotate(0);
+        }
+        25% {
+          transform: rotate(-10deg);
+        }
+        75% {
+          transform: rotate(10deg);
+        }
+      }
+
+      @keyframes iconPulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Section Transitions */
+      .section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+      }
+
+      .section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Dark mode adjustments */
+      [data-theme="dark"] .background-pattern {
+        opacity: 0.02;
+      }
+
+      /* Gradient text effect for titles */
+      .section__title {
+        background: linear-gradient(45deg, #4caf50, #2196F3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+      }
+
+      /* Smooth hover effect for buttons */
+      .button {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .button::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: -100%;
+        background: linear-gradient(90deg, rgba(255,255,255,0.2), transparent);
+        transition: 0.5s;
+      }
+
+      .button:hover::after {
+        left: 100%;
+      }
+
+      /* Card hover effects */
+      .project__card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .project__card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+
+      /* Skill bar animation */
+      .skills__percentage-bar {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skills__percentage-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg, 
+          rgba(255,255,255,0.1) 25%, 
+          rgba(255,255,255,0.2) 50%, 
+          rgba(255,255,255,0.1) 75%
+        );
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      /* Social media icon effects */
+      .home__social-link {
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .home__social-link:hover {
+        transform: translateY(-5px) scale(1.2);
+        color: #4caf50;
+      }
+
+      /* Navigation link highlight effect */
+      .nav__link {
+        position: relative;
+      }
+
+      .nav__link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background: #4caf50;
+        transition: width 0.3s ease;
+      }
+
+      .nav__link:hover::after {
+        width: 100%;
+      }
+
+      /* Scroll indicator pulse */
+      .home__scroll-mouse {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+
+      /* Section fade-in effect */
+      .section {
+        animation: fadeIn 1s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section__title {
+        font-size: 2rem;
+        color: var(--title-color);
+        text-align: center;
+        margin-bottom: 1.5rem;
+        width: 100%;
+        position: relative;
+        padding-top: 2rem;
+      }
+
+      .section__subtitle {
+        display: block;
+        font-size: 0.875rem;
+        color: var(--text-color-light);
+        text-align: center;
+        margin-bottom: 3rem;
+        width: 100%;
+      }
+
+      .section {
+        padding: 6rem 0 2rem;
+      }
+
+      .about__section,
+      .skills__section,
+      .projects__section,
+      .contact__section,
+      .fitness__section {
+        margin-top: 2rem;
+        padding-top: 2rem;
+      }
+
+      /* Container adjustments */
+      .container {
+        max-width: 968px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Responsive adjustments */
+      @media screen and (max-width: 768px) {
+        .section__title {
+          font-size: 1.75rem;
+          padding-top: 1.5rem;
+        }
+        
+        .section__subtitle {
+          margin-bottom: 2rem;
+        }
+
+        .section {
+          padding: 4rem 0 1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body oncontextmenu="return false">
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="#" class="nav__logo">Mussadiq Wani</a>
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list grid">
+            <li class="nav__item">
+              <a href="#home" class="nav__link active-link">
+                <i class="uil uil-estate nav__icon"></i>Home
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="#about" class="nav__link">
+                <i class="uil uil-user nav__icon"></i>About
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="#skills" class="nav__link">
+                <i class="uil uil-file-alt nav__icon"></i>Skills
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="#projects" class="nav__link">
+                <i class="uil uil-scenery nav__icon"></i>Projects
+              </a>
+            </li>
+            <li class="nav__item">
+              <a href="#contact" class="nav__link">
+                <i class="uil uil-message nav__icon"></i>Contact
+              </a>
+            </li>
+          </ul>
+          <i class="uil uil-times nav__close" id="nav-close"></i>
+        </div>
+        <div class="nav__btns">
+          <i class="uil uil-moon change-theme" id="theme-button"></i>
+          <div class="nav__toggle" id="nav-toggle">
+            <i class="uil uil-apps"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="home section" id="home">
+        <div class="home__container container">
+          <div class="home__content">
+            <div class="home__social">
+              <a href="https://www.linkedin.com/in/mussadiqwani/" target="_blank" class="home__social-link">
+                <i class="uil uil-linkedin-alt"></i>
+              </a>
+              <a href="https://github.com/mussadiqwani" target="_blank" class="home__social-link">
+                <i class="uil uil-github-alt"></i>
+              </a>
+            </div>
+
+            <div class="home__data">
+              <div class="home__title-container">
+                <h1 class="home__title">
+                  <span class="greeting">Hi, I'm</span>
+                  <span class="highlight name">Mussadiq Wani</span>
+                </h1>
+                <div class="home__blob"></div>
+              </div>
+              <h3 class="home__subtitle">Full-Stack Developer</h3>
+              <p class="home__description">
+                I specialize in building high-quality web applications with a focus on user experience and performance. With a passion for technology and innovation, I strive to create impactful digital solutions.
+              </p>
+              <div class="home__buttons">
+                <a href="#contact" class="button button--flex home__button">
+                  Contact me<i class="uil uil-message button__icon"></i>
+                </a>
+                <a href="#projects" class="button button--flex button--ghost">
+                  View Projects<i class="uil uil-arrow-right button__icon"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="home__scroll">
+            <a href="#about" class="home__scroll-button button--flex">
+              <span class="home__scroll-text">Scroll Down</span>
+              <div class="home__scroll-mouse">
+                <div class="home__scroll-wheel"></div>
+              </div>
+              <i class="uil uil-arrow-down home__scroll-arrow"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        .home__container {
+          position: relative;
+          row-gap: 4.5rem;
+          padding-top: 2rem;
+        }
+
+        .home__content {
+          display: grid;
+          grid-template-columns: 116px repeat(2, 1fr);
+          padding-top: 5.5rem;
+          column-gap: 2rem;
+          align-items: center;
+        }
+
+        .home__social {
+          display: grid;
+          grid-template-columns: max-content;
+          row-gap: 1rem;
+        }
+
+        .home__social-link {
+          font-size: 1.4rem;
+          color: var(--title-color);
+          transition: all 0.3s ease;
+        }
+
+        .home__social-link:hover {
+          color: #4caf50;
+          transform: translateY(-5px);
+        }
+
+        .home__title-container {
+          position: relative;
+          margin-bottom: 2rem;
+        }
+
+        .home__title {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          font-size: 3.5rem;
+          line-height: 1.2;
+          margin-bottom: 0.75rem;
+          font-weight: 700;
+          text-align: left;
+        }
+
+        .greeting {
+          display: block;
+          background: linear-gradient(45deg, #333333, #4caf50);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-size: 2.8rem;
+          font-weight: 600;
+          letter-spacing: 0.5px;
+        }
+
+        .name {
+          display: block;
+          white-space: nowrap;
+          font-size: 3.8rem;
+          background: linear-gradient(45deg, #4caf50, #2196F3);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-weight: 800;
+          letter-spacing: 1px;
+          padding-left: 4rem;
+          margin-top: 0.2rem;
+        }
+
+        .highlight {
+          position: relative;
+        }
+
+        .highlight::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 4px;
+          bottom: -8px;
+          left: 0;
+          background: linear-gradient(90deg, #4caf50, #2196F3);
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 0.5s ease;
+          border-radius: 2px;
+        }
+
+        .highlight:hover::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+
+        .home__blob {
+          position: absolute;
+          width: 250px;
+          height: 250px;
+          background: linear-gradient(180deg, rgba(76, 175, 80, 0.1), transparent);
+          filter: blur(60px);
+          top: -70px;
+          right: -60px;
+          z-index: -1;
+          border-radius: 50%;
+          animation: blobAnimation 8s infinite;
+        }
+
+        .home__subtitle {
+          font-size: 1.5rem;
+          color: var(--text-color);
+          font-weight: 500;
+          margin-bottom: 1rem;
+        }
+
+        .home__description {
+          max-width: 600px;
+          margin-bottom: 2rem;
+          line-height: 1.8;
+          color: var(--text-color-light);
+        }
+
+        .home__buttons {
+          display: flex;
+          gap: 1.5rem;
+        }
+
+        .button {
+          display: inline-flex;
+          align-items: center;
+          padding: 1rem 2rem;
+          border-radius: 0.5rem;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .home__button {
+          background: #4caf50;
+          color: #fff;
+        }
+
+        .button--ghost {
+          border: 2px solid #4caf50;
+          color: #4caf50;
+          background: transparent;
+        }
+
+        .button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .button__icon {
+          margin-left: 0.5rem;
+          transition: 0.3s;
+        }
+
+        .button:hover .button__icon {
+          transform: translateX(5px);
+        }
+
+        .home__scroll {
+          position: fixed;
+          right: 2rem;
+          top: 50%;
+          transform: translateY(-50%);
+          writing-mode: vertical-rl;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          z-index: 10;
+        }
+
+        .home__scroll-button {
+          color: var(--title-color);
+          transition: 0.3s;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+          text-decoration: none;
+        }
+
+        .home__scroll-text {
+          font-size: 0.875rem;
+          font-weight: 500;
+          letter-spacing: 0.1em;
+          transform: rotate(180deg);
+          color: #4caf50;
+        }
+
+        .home__scroll-mouse {
+          width: 2px;
+          height: 50px;
+          background: rgba(76, 175, 80, 0.3);
+          border-radius: 1px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .home__scroll-wheel {
+          width: 100%;
+          height: 15px;
+          background: #4caf50;
+          border-radius: 1px;
+          position: absolute;
+          top: 0;
+          animation: scrollWheel 2s ease infinite;
+        }
+
+        .home__scroll-arrow {
+          font-size: 1.25rem;
+          color: #4caf50;
+          transform: rotate(180deg);
+          animation: arrowBounce 2s infinite;
+        }
+
+        @keyframes scrollWheel {
+          0% { top: 0; }
+          50% { top: calc(100% - 15px); }
+          100% { top: 0; }
+        }
+
+        @keyframes arrowBounce {
+          0%, 100% { transform: rotate(180deg) translateY(0); }
+          50% { transform: rotate(180deg) translateY(-5px); }
+        }
+
+        @keyframes blobAnimation {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+
+        /* Dark mode adjustments */
+        [data-theme="dark"] .greeting {
+          background: linear-gradient(45deg, #ffffff, #4caf50);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        [data-theme="dark"] .name {
+          background: linear-gradient(45deg, #4caf50, #64b5f6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 992px) {
+          .home__content {
+            grid-template-columns: 100px repeat(2, 1fr);
+            column-gap: 1.25rem;
+          }
+          .home__title {
+            font-size: 2.5rem;
+          }
+          .home__buttons {
+            flex-direction: column;
+          }
+          .greeting {
+            font-size: 2rem;
+          }
+          .name {
+            font-size: 2.8rem;
+            padding-left: 3rem;
+          }
+        }
+
+        @media screen and (max-width: 768px) {
+          .home__content {
+            grid-template-columns: 0.5fr 3fr;
+            padding-top: 3.5rem;
+          }
+          .home__blob {
+            width: 200px;
+            height: 200px;
+          }
+          .greeting {
+            font-size: 1.8rem;
+          }
+          .name {
+            font-size: 2.4rem;
+            padding-left: 2rem;
+          }
+          .home__scroll {
+            right: 1rem;
+          }
+          .home__scroll-mouse {
+            height: 40px;
+          }
+        }
+
+        @media screen and (max-width: 350px) {
+          .home__content {
+            grid-template-columns: 0.25fr 3fr;
+          }
+          .greeting {
+            font-size: 1.5rem;
+          }
+          .name {
+            font-size: 2rem;
+            padding-left: 1rem;
+          }
+          .home__scroll {
+            display: none;
+          }
+        }
+      </style>
+
+      <section class="about section" id="about">
+        <h2 class="section__title">About Me</h2>
+        <span class="section__subtitle">My introduction</span>
+
+        <div class="about__container container grid">
+          <div class="about__img-wrapper">
+            <div class="about__img-container">
+              <img src="https://iili.io/2pnMpgs.jpg" alt="About Me Image" class="about__img" />
+              <div class="about__img-decoration"></div>
+            </div>
+          </div>
+
+          <div class="about__data">
+            <div class="about__content-wrapper">
+              <div class="about__description-box">
+                <p class="about__description">
+                  I am pursuing a Bachelor's degree in Computer Applications (BCA) and have honed my expertise in web development, artificial intelligence, and digital computing. With a strong foundation in React.js, Next.js, Node.js, Express.js, Python, MongoDB, PostgreSQL, and Tailwind CSS, I have contributed to various projects, ranging from real estate platforms to personal AI assistants. My approach combines technical precision with creative problem-solving, always aiming to solve real-world challenges and exceed expectations.
+                </p>
+              </div>
+              
+              <div class="about__highlights">
+                <h3 class="highlights__title">Key Achievements</h3>
+                <ul class="about__achievements">
+                  <li><i class="fas fa-check-circle"></i> Developed a real estate platform serving 22 districts.</li>
+                  <li><i class="fas fa-check-circle"></i> Created a personal AI voice assistant.</li>
+                  <li><i class="fas fa-check-circle"></i> Contributed to open-source projects on GitHub.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        .about__container {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .about__container.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .about__img-wrapper {
+          position: relative;
+          padding: 1rem;
+        }
+
+        .about__img-container {
+          position: relative;
+          border-radius: 1.5rem;
+          overflow: hidden;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .about__img {
+          width: 100%;
+          height: auto;
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .about__img-container:hover .about__img {
+          transform: scale(1.05);
+        }
+
+        .about__img-decoration {
+          position: absolute;
+          top: -10px;
+          left: -10px;
+          right: -10px;
+          bottom: -10px;
+          border: 2px solid var(--first-color);
+          border-radius: 1.5rem;
+          z-index: -1;
+          opacity: 0.5;
+        }
+
+        .about__content-wrapper {
+          background: var(--container-color);
+          border-radius: 1.5rem;
+          padding: 2rem;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .about__description-box {
+          position: relative;
+          padding: 1.5rem;
+          margin-bottom: 2rem;
+          border: 1px solid rgba(76, 175, 80, 0.2);
+          border-radius: 1rem;
+          background: rgba(76, 175, 80, 0.02);
+        }
+
+        .about__description {
+          font-size: 1rem;
+          line-height: 1.8;
+          color: var(--text-color);
+        }
+
+        .highlights__title {
+          font-size: 1.2rem;
+          color: var(--title-color);
+          margin-bottom: 1rem;
+          position: relative;
+          padding-left: 1rem;
+        }
+
+        .highlights__title::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 4px;
+          height: 1.2rem;
+          background: var(--first-color);
+          border-radius: 2px;
+        }
+
+        .about__achievements {
+          list-style: none;
+          padding: 0;
+        }
+
+        .about__achievements li {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-bottom: 1rem;
+          font-size: 1rem;
+          color: var(--text-color);
+        }
+
+        .about__achievements i {
+          color: var(--first-color);
+          font-size: 1.2rem;
+        }
+
+        /* Dark mode adjustments */
+        [data-theme="dark"] .about__content-wrapper {
+          background: var(--container-color-dark);
+        }
+
+        [data-theme="dark"] .about__description-box {
+          border-color: rgba(76, 175, 80, 0.3);
+          background: rgba(76, 175, 80, 0.05);
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+          .about__content-wrapper {
+            padding: 1.5rem;
+          }
+
+          .about__description-box {
+            padding: 1rem;
+          }
+        }
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const aboutSection = document.querySelector('.about__container');
+
+          const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                aboutSection.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1 });
+
+          observer.observe(aboutSection);
+        });
+      </script>
+
+      <section class="skills section" id="skills">
+        <h2 class="section__title">Skills & Expertise</h2>
+        <span class="section__subtitle">My technical level</span>
+
+        <div class="skills__container container">
+          <!-- Left Column -->
+          <div class="skills__column">
+            <!-- Programming & Scripting -->
+            <div class="skills__content skills__close">
+              <div class="skills__header">
+                <i class="fas fa-code skills__icon"></i>
+                <div>
+                  <h1 class="skills__title">Programming & Scripting</h1>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+              <div class="skills__list grid">
+                <div class="skills__data" title="Proficient in C programming">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fas fa-copyright skills__icon"></i>
+                      <h3 class="skills__name">C</h3>
+                    </div>
+                    <span class="skills__percentage">80%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 80%;"></span>
+                  </div>
+                </div>
+
+                <div class="skills__data" title="Expert in Python">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fab fa-python skills__icon"></i>
+                      <h3 class="skills__name">Python</h3>
+                    </div>
+                    <span class="skills__percentage">90%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 90%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Computer Science -->
+            <div class="skills__content skills__close">
+              <div class="skills__header">
+                <i class="fas fa-microchip skills__icon"></i>
+                <div>
+                  <h1 class="skills__title">Computer Science</h1>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+              <div class="skills__list grid">
+                <div class="skills__data" title="Deep understanding of computer architecture">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fas fa-server skills__icon"></i>
+                      <h3 class="skills__name">Computer Architecture</h3>
+                    </div>
+                    <span class="skills__percentage">85%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 85%;"></span>
+                  </div>
+                </div>
+
+                <div class="skills__data" title="Expertise in AI">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fas fa-brain skills__icon"></i>
+                      <h3 class="skills__name">Artificial Intelligence</h3>
+                    </div>
+                    <span class="skills__percentage">80%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 80%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Databases -->
+            <div class="skills__content skills__close">
+              <div class="skills__header">
+                <i class="fas fa-database skills__icon"></i>
+                <div>
+                  <h1 class="skills__title">Databases</h1>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+              <div class="skills__list grid">
+                <div class="skills__data" title="MongoDB expertise">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fas fa-leaf skills__icon"></i>
+                      <h3 class="skills__name">MongoDB</h3>
+                    </div>
+                    <span class="skills__percentage">85%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 85%;"></span>
+                  </div>
+                </div>
+
+                <div class="skills__data" title="PostgreSQL proficiency">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fas fa-database skills__icon"></i>
+                      <h3 class="skills__name">PostgreSQL</h3>
+                    </div>
+                    <span class="skills__percentage">80%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 80%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cloud & Hosting -->
+            <div class="skills__content skills__close">
+              <div class="skills__header">
+                <i class="fas fa-cloud skills__icon"></i>
+                <div>
+                  <h1 class="skills__title">Cloud & Hosting</h1>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+              <div class="skills__list grid">
+                <div class="skills__data" title="AWS experience">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fab fa-aws skills__icon"></i>
+                      <h3 class="skills__name">AWS</h3>
+                    </div>
+                    <span class="skills__percentage">75%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 75%;"></span>
+                  </div>
+                </div>
+
+                <div class="skills__data" title="Vercel deployment">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fas fa-server skills__icon"></i>
+                      <h3 class="skills__name">Vercel</h3>
+                    </div>
+                    <span class="skills__percentage">85%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 85%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="skills__column">
+            <!-- Business & E-commerce -->
+            <div class="skills__content skills__close">
+              <div class="skills__header">
+                <i class="fas fa-chart-line skills__icon"></i>
+                <div>
+                  <h1 class="skills__title">Business & E-commerce</h1>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+              <div class="skills__list grid">
+                <div class="skills__data" title="E-commerce platforms">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fas fa-shopping-cart skills__icon"></i>
+                      <h3 class="skills__name">E-commerce</h3>
+                    </div>
+                    <span class="skills__percentage">90%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 90%;"></span>
+                  </div>
+                </div>
+
+                <div class="skills__data" title="Business Strategy">
+                  <div class="skills__titles">
+                    <div class="skills__name-container">
+                      <i class="fas fa-lightbulb skills__icon"></i>
+                      <h3 class="skills__name">Business Strategy</h3>
+                    </div>
+                    <span class="skills__percentage">85%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 85%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Graphic Design -->
+            <div class="skills__content skills__close">
+              <div class="skills__header">
+                <i class="fas fa-palette skills__icon"></i>
+                <div>
+                  <h1 class="skills__title">Graphic Design</h1>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+              <div class="skills__list grid">
+                <div class="skills__data">
+                  <div class="skills__titles">
+                    <h3 class="skills__name">Adobe Photoshop</h3>
+                    <span class="skills__percentage">85%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 85%;"></span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <div class="skills__titles">
+                    <h3 class="skills__name">Adobe Illustrator</h3>
+                    <span class="skills__percentage">80%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 80%;"></span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <div class="skills__titles">
+                    <h3 class="skills__name">Figma</h3>
+                    <span class="skills__percentage">90%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 90%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- UI/UX Design -->
+            <div class="skills__content skills__close">
+              <div class="skills__header">
+                <i class="fas fa-pencil-ruler skills__icon"></i>
+                <div>
+                  <h1 class="skills__title">UI/UX Design</h1>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+              <div class="skills__list grid">
+                <div class="skills__data">
+                  <div class="skills__titles">
+                    <h3 class="skills__name">Wireframing</h3>
+                    <span class="skills__percentage">90%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 90%;"></span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <div class="skills__titles">
+                    <h3 class="skills__name">Prototyping</h3>
+                    <span class="skills__percentage">85%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 85%;"></span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <div class="skills__titles">
+                    <h3 class="skills__name">User Research</h3>
+                    <span class="skills__percentage">80%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 80%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Management -->
+            <div class="skills__content skills__close">
+              <div class="skills__header">
+                <i class="fas fa-tasks skills__icon"></i>
+                <div>
+                  <h1 class="skills__title">Project Management</h1>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+              <div class="skills__list grid">
+                <div class="skills__data">
+                  <div class="skills__titles">
+                    <h3 class="skills__name">Agile Methodology</h3>
+                    <span class="skills__percentage">85%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 85%;"></span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <div class="skills__titles">
+                    <h3 class="skills__name">Team Leadership</h3>
+                    <span class="skills__percentage">90%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 90%;"></span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <div class="skills__titles">
+                    <h3 class="skills__name">Risk Management</h3>
+                    <span class="skills__percentage">80%</span>
+                  </div>
+                  <div class="skills__bar">
+                    <span class="skills__percentage-bar" style="width: 80%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        .skills__container {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+          max-width: 1024px;
+          margin: 0 auto;
+        }
+
+        .skills__column {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .skills__content {
+          background-color: var(--container-color);
+          padding: 1.5rem;
+          border-radius: 1rem;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          aspect-ratio: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .skills__list {
+          flex: 1;
+          overflow-y: auto;
+          padding-right: 0.5rem;
+        }
+
+        .skills__list::-webkit-scrollbar {
+          width: 0.5rem;
+          background: transparent;
+        }
+
+        .skills__list::-webkit-scrollbar-thumb {
+          background: var(--first-color-lighter);
+          border-radius: 0.25rem;
+        }
+
+        .skills__header {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+        }
+
+        .skills__icon {
+          font-size: 2rem;
+          color: var(--first-color);
+          margin-right: 0.75rem;
+        }
+
+        .skills__arrow {
+          margin-left: auto;
+          transition: transform 0.3s;
+        }
+
+        .skills__open .skills__list {
+          max-height: 1000px;
+          transition: max-height 0.5s ease-in;
+        }
+
+        .skills__open .skills__arrow {
+          transform: rotate(180deg);
+        }
+
+        .skills__titles {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.5rem;
+        }
+
+        .skills__name-container {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .skills__name {
+          font-size: 0.938rem;
+          font-weight: 500;
+        }
+
+        .skills__percentage {
+          font-size: 0.938rem;
+          color: var(--text-color);
+        }
+
+        .skills__bar {
+          background-color: var(--first-color-lighter);
+          height: 5px;
+          border-radius: 0.25rem;
+        }
+
+        .skills__percentage-bar {
+          height: 5px;
+          border-radius: 0.25rem;
+          background-color: var(--first-color);
+        }
+
+        .skills__percentage::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.1) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.1) 50%,
+            rgba(255, 255, 255, 0.1) 75%,
+            transparent 75%
+          );
+          background-size: 1rem 1rem;
+          animation: progress-animation 1s linear infinite;
+        }
+
+        @keyframes progress-animation {
+          0% {
+            background-position: 1rem 0;
+          }
+          100% {
+            background-position: 0 0;
+          }
+        }
+
+        .skills__bar,
+        .skills__percentage-bar {
+          height: 5px;
+          border-radius: 0.25rem;
+        }
+
+        .skills__bar {
+          background-color: var(--first-color-lighter);
+        }
+
+        .skills__data {
+          position: relative;
+        }
+
+        .skills__data:hover::before {
+          content: attr(title);
+          position: absolute;
+          top: -30px;
+          left: 0;
+          background: var(--first-color);
+          color: #fff;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.25rem;
+          font-size: 0.75rem;
+          white-space: nowrap;
+          z-index: 1;
+        }
+
+        .skills__data:hover::after {
+          content: '';
+          position: absolute;
+          top: -8px;
+          left: 10px;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-top: 8px solid var(--first-color);
+        }
+
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Dark mode adjustments */
+        [data-theme="dark"] .skills__content {
+          background-color: var(--container-color-dark);
+        }
+
+        [data-theme="dark"] .skills__header:hover {
+          background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+          .skills__container {
+            grid-template-columns: 1fr;
+          }
+          
+          .skills__content {
+            aspect-ratio: auto;
+            min-height: 300px;
+          }
+        }
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const skillsHeaders = document.querySelectorAll('.skills__header');
+          
+          skillsHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+              const parent = this.parentElement;
+              const isOpen = parent.classList.contains('skills__open');
+              
+              // Close all sections
+              document.querySelectorAll('.skills__content').forEach(content => {
+                content.classList.remove('skills__open');
+                content.classList.add('skills__close');
+              });
+              
+              // Open clicked section if it was closed
+              if (!isOpen) {
+                parent.classList.remove('skills__close');
+                parent.classList.add('skills__open');
+              }
+            });
+          });
+        });
+      </script>
+
+      <section class="projects section" id="projects">
+        <h2 class="section__title">Projects</h2>
+        <span class="section__subtitle">Most recent work</span>
+
+        <div class="projects__container container">
+          <!-- AI Voice Assistant Project -->
+          <div class="project__card">
+            <div class="project__image-container">
+              <img src="https://iili.io/2pxr76u.jpg" alt="AI Assistant Project" class="project__img">
+              <div class="project__category">
+                <i class="fas fa-robot"></i>
+                <span>AI & ML</span>
+              </div>
+            </div>
+            
+            <div class="project__content">
+              <h3 class="project__title">AI Voice Assistant</h3>
+              <p class="project__description">
+                Personal AI assistant with voice recognition, natural language processing, and task automation capabilities.
+              </p>
+              
+              <div class="project__tech-stack">
+                <span class="tech__badge"><i class="fab fa-python"></i> Python</span>
+                <span class="tech__badge"><i class="fas fa-microphone"></i> Speech Recognition</span>
+                <span class="tech__badge"><i class="fas fa-brain"></i> TensorFlow</span>
+              </div>
+
+              <div class="project__links">
+                <a href="#" class="project__link">
+                  <i class="fas fa-code"></i>
+                  Source Code
+                </a>
+                <a href="#" class="project__link">
+                  <i class="fas fa-external-link-alt"></i>
+                  Live Demo
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real Estate Website Project -->
+          <div class="project__card">
+            <div class="project__image-container">
+              <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" alt="Real Estate Project" class="project__img">
+              <div class="project__category">
+                <i class="fas fa-home"></i>
+                <span>Web Development</span>
+              </div>
+            </div>
+            
+            <div class="project__content">
+              <h3 class="project__title">Real Estate Platform</h3>
+              <p class="project__description">
+                Modern real estate platform serving 22 districts with property listings, search functionality, and user authentication.
+              </p>
+              
+              <div class="project__tech-stack">
+                <span class="tech__badge"><i class="fab fa-react"></i> React.js</span>
+                <span class="tech__badge"><i class="fab fa-node"></i> Node.js</span>
+                <span class="tech__badge"><i class="fas fa-database"></i> MongoDB</span>
+              </div>
+
+              <div class="project__links">
+                <a href="#" class="project__link">
+                  <i class="fas fa-code"></i>
+                  Source Code
+                </a>
+                <a href="#" class="project__link">
+                  <i class="fas fa-external-link-alt"></i>
+                  Live Demo
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal App Project -->
+          <div class="project__card">
+            <div class="project__image-container">
+              <img src="https://iili.io/2pldvcl.png" alt="Personal App Project" class="project__img">
+              <div class="project__category">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Mobile App</span>
+              </div>
+            </div>
+            
+            <div class="project__content">
+              <h3 class="project__title">Personal App</h3>
+              <p class="project__description">
+                Feature-rich personal management app with task tracking, notes, and productivity tools.
+              </p>
+              
+              <div class="project__tech-stack">
+                <span class="tech__badge"><i class="fab fa-react"></i> React Native</span>
+                <span class="tech__badge"><i class="fas fa-database"></i> Firebase</span>
+                <span class="tech__badge"><i class="fas fa-palette"></i> UI/UX</span>
+              </div>
+
+              <div class="project__links">
+                <a href="#" class="project__link">
+                  <i class="fas fa-code"></i>
+                  Source Code
+                </a>
+                <a href="#" class="project__link">
+                  <i class="fas fa-external-link-alt"></i>
+                  Live Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        .projects__container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+          padding: 1rem;
+        }
+
+        .project__card {
+          background: var(--container-color);
+          border-radius: 1.5rem;
+          overflow: hidden;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+        }
+
+        .project__card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project__image-container {
+          position: relative;
+          overflow: hidden;
+          height: 200px;
+        }
+
+        .project__img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+
+        .project__card:hover .project__img {
+          transform: scale(1.1);
+        }
+
+        .project__category {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          background: rgba(76, 175, 80, 0.9);
+          padding: 0.5rem 1rem;
+          border-radius: 2rem;
+          color: #fff;
+          font-size: 0.875rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .project__content {
+          padding: 1.5rem;
+        }
+
+        .project__title {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-bottom: 0.75rem;
+          color: var(--title-color);
+        }
+
+        .project__description {
+          font-size: 0.938rem;
+          color: var(--text-color);
+          margin-bottom: 1rem;
+        }
+
+        .project__tech-stack {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .tech__badge {
+          background: rgba(76, 175, 80, 0.1);
+          color: var(--first-color);
+          padding: 0.25rem 0.75rem;
+          border-radius: 1rem;
+          font-size: 0.813rem;
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+
+        .project__links {
+          display: flex;
+          gap: 1rem;
+        }
+
+        .project__link {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: var(--first-color);
+          font-size: 0.938rem;
+          font-weight: 500;
+          transition: color 0.3s ease;
+        }
+
+        .project__link:hover {
+          color: var(--first-color-alt);
+        }
+
+        /* Dark mode adjustments */
+        [data-theme="dark"] .project__card {
+          background: var(--container-color-dark);
+        }
+
+        [data-theme="dark"] .tech__badge {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+          .projects__container {
+            grid-template-columns: 1fr;
+          }
+        }
+      </style>
+
+      <section class="contact section" id="contact">
+        <h2 class="section__title">Contact Me</h2>
+        <span class="section__subtitle">Get in touch</span>
+
+        <div class="contact__container container grid">
+          <!-- Contact Information Cards -->
+          <div class="contact__info">
+            <div class="info__card">
+              <div class="info__icon">
+                <i class="uil uil-phone-volume"></i>
+              </div>
+              <div class="info__data">
+                <h3>Call Me</h3>
+                <span>9906106156</span>
+              </div>
+            </div>
+
+            <div class="info__card">
+              <div class="info__icon">
+                <i class="uil uil-envelope"></i>
+              </div>
+              <div class="info__data">
+                <h3>Email</h3>
+                <span>mussadiqwani19@gmail.com</span>
+              </div>
+            </div>
+
+            <div class="info__card">
+              <div class="info__icon">
+                <i class="uil uil-map-marker"></i>
+              </div>
+              <div class="info__data">
+                <h3>Location</h3>
+                <span>Jammu & Kashmir, India</span>
+              </div>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="contact__socials">
+              <a href="https://github.com/mussadiqwani" class="social__link" target="_blank">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://in.linkedin.com/in/mussadiq-wani-63619226b" class="social__link" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://x.com/mussadiqwani/" class="social__link" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://www.instagram.com/mussadiq_wanii/" class="social__link" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact__form-container">
+            <form action="" class="contact__form">
+              <div class="form__group">
+                <input type="text" class="form__input" placeholder=" " required>
+                <label class="form__label">Name</label>
+                <i class="uil uil-user form__icon"></i>
+              </div>
+
+              <div class="form__group">
+                <input type="email" class="form__input" placeholder=" " required>
+                <label class="form__label">Email</label>
+                <i class="uil uil-envelope form__icon"></i>
+              </div>
+
+              <div class="form__group">
+                <input type="text" class="form__input" placeholder=" " required>
+                <label class="form__label">Subject</label>
+                <i class="uil uil-subject form__icon"></i>
+              </div>
+
+              <div class="form__group">
+                <textarea class="form__input" placeholder=" " required></textarea>
+                <label class="form__label">Message</label>
+                <i class="uil uil-message form__icon"></i>
+              </div>
+
+              <button type="submit" class="button button--flex">
+                Send Message
+                <i class="uil uil-message button__icon"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        .contact__container {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 3rem;
+          padding: 2rem;
+        }
+
+        /* Contact Info Cards */
+        .contact__info {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .info__card {
+          background: var(--container-color);
+          padding: 1.5rem;
+          border-radius: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+        }
+
+        .info__card:hover {
+          transform: translateY(-5px);
+        }
+
+        .info__icon {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          color: white;
+        }
+
+        .info__data h3 {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--title-color);
+          margin-bottom: 0.25rem;
+        }
+
+        .info__data span {
+          font-size: 0.9rem;
+          color: var(--text-color);
+        }
+
+        /* Social Media Links */
+        .contact__socials {
+          display: flex;
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+
+        .social__link {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          background: var(--container-color);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          color: var(--title-color);
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social__link:hover {
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          color: white;
+          transform: translateY(-3px);
+        }
+
+        /* Contact Form */
+        .contact__form-container {
+          background: var(--container-color);
+          padding: 2rem;
+          border-radius: 1rem;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form__group {
+          position: relative;
+          margin-bottom: 1.5rem;
+        }
+
+        .form__input {
+          width: 100%;
+          padding: 1rem;
+          padding-left: 3rem;
+          border: 2px solid var(--text-color-light);
+          border-radius: 0.75rem;
+          background: none;
+          color: var(--text-color);
+          font-size: 1rem;
+          outline: none;
+          transition: border-color 0.3s ease;
+        }
+
+        .form__input:focus {
+          border-color: var(--first-color);
+        }
+
+        .form__label {
+          position: absolute;
+          left: 3rem;
+          top: 1rem;
+          font-size: 1rem;
+          color: var(--text-color-light);
+          background: var(--container-color);
+          padding: 0 0.25rem;
+          pointer-events: none;
+          transition: all 0.3s ease;
+        }
+
+        .form__icon {
+          position: absolute;
+          left: 1rem;
+          top: 1rem;
+          font-size: 1.25rem;
+          color: var(--text-color-light);
+          transition: color 0.3s ease;
+        }
+
+        .form__input:focus + .form__label,
+        .form__input:not(:placeholder-shown) + .form__label {
+          top: -0.5rem;
+          left: 1rem;
+          font-size: 0.875rem;
+          color: var(--first-color);
+        }
+
+        .form__input:focus ~ .form__icon {
+          color: var(--first-color);
+        }
+
+        textarea.form__input {
+          height: 11rem;
+          resize: none;
+        }
+
+        .button {
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          color: white;
+          padding: 1rem 2rem;
+          border-radius: 0.75rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Dark Mode Adjustments */
+        [data-theme="dark"] .info__card,
+        [data-theme="dark"] .contact__form-container {
+          background: var(--container-color-dark);
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 968px) {
+          .contact__container {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media screen and (max-width: 768px) {
+          .contact__container {
+            padding: 1rem;
+          }
+        }
+      </style>
+
+      <section class="fitness section" id="fitness">
+        <h2 class="section__title">My Fitness Journey</h2>
+        <span class="section__subtitle">From 55kg to 80kg in 2 Years</span>
+
+        <div class="fitness__container container">
+          <!-- Progress Stats with Modern Cards -->
+          <div class="fitness__stats">
+            <div class="stat__item">
+              <div class="stat__circle current">
+                <span class="stat__number">80</span>
+                <span class="stat__unit">kg</span>
+                <div class="stat__icon">
+                  <i class="fas fa-dumbbell"></i>
+                </div>
+              </div>
+              <span class="stat__label">Current Weight</span>
+              <span class="stat__date">2024</span>
+            </div>
+            <div class="progress__timeline">
+              <div class="timeline__line"></div>
+              <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="stat__item">
+              <div class="stat__circle start">
+                <span class="stat__number">55</span>
+                <span class="stat__unit">kg</span>
+                <div class="stat__icon">
+                  <i class="fas fa-running"></i>
+                </div>
+              </div>
+              <span class="stat__label">Starting Weight</span>
+              <span class="stat__date">2021</span>
+            </div>
+          </div>
+
+          <!-- Achievement Cards -->
+          <div class="fitness__achievements">
+            <div class="achievement__card">
+              <i class="fas fa-fire-alt"></i>
+              <h3>Strength Gains</h3>
+              <ul>
+                <li><i class="fas fa-check"></i> Bench: 20kg → 85kg</li>
+                <li><i class="fas fa-check"></i> Squat: 30kg → 100kg</li>
+                <li><i class="fas fa-check"></i> Deadlift: 40kg → 120kg</li>
+              </ul>
+            </div>
+            <div class="achievement__card">
+              <i class="fas fa-heartbeat"></i>
+              <h3>Body Stats</h3>
+              <ul>
+                <li><i class="fas fa-check"></i> Weight: +25kg Muscle Mass</li>
+                <li><i class="fas fa-check"></i> Body Fat: Maintained 15%</li>
+                <li><i class="fas fa-check"></i> Improved Stamina</li>
+              </ul>
+            </div>
+            <div class="achievement__card">
+              <i class="fas fa-clock"></i>
+              <h3>Consistency</h3>
+              <ul>
+                <li><i class="fas fa-check"></i> 5 Days/Week Training</li>
+                <li><i class="fas fa-check"></i> 2 Years Dedication</li>
+                <li><i class="fas fa-check"></i> Proper Rest & Recovery</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Workout Split Cards -->
+          <div class="workout__split">
+            <h3 class="split__title">Weekly Training Split</h3>
+            <div class="split__container">
+              <div class="split__card">
+                <div class="card__header">
+                  <i class="fas fa-dumbbell"></i>
+                  <h4>Push Day</h4>
+                </div>
+                <div class="card__content">
+                  <p>Chest, Shoulders, Triceps</p>
+                  <ul>
+                    <li>Bench Press</li>
+                    <li>Shoulder Press</li>
+                    <li>Tricep Extensions</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="split__card">
+                <div class="card__header">
+                  <i class="fas fa-hand-rock"></i>
+                  <h4>Pull Day</h4>
+                </div>
+                <div class="card__content">
+                  <p>Back & Biceps</p>
+                  <ul>
+                    <li>Deadlifts</li>
+                    <li>Barbell Rows</li>
+                    <li>Bicep Curls</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="split__card">
+                <div class="card__header">
+                  <i class="fas fa-running"></i>
+                  <h4>Leg Day</h4>
+                </div>
+                <div class="card__content">
+                  <p>Lower Body Focus</p>
+                  <ul>
+                    <li>Squats</li>
+                    <li>Leg Press</li>
+                    <li>Calf Raises</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Workout Plan Button -->
+          <div class="fitness__cta">
+            <a href="https://drive.google.com/file/d/1gtnag3W-lMQd5IlZBe6a-_otbJI20FS6/view?usp=drivesdk" target="_blank" class="cta__button">
+              <i class="fas fa-dumbbell"></i>
+              <span>View Complete Workout Plan</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        .fitness__container {
+          padding: 2rem;
+        }
+
+        /* Progress Stats Styling */
+        .fitness__stats {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 2rem;
+          margin-bottom: 4rem;
+        }
+
+        .stat__circle {
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          position: relative;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+          transition: transform 0.3s ease;
+        }
+
+        .stat__circle.start {
+          background: linear-gradient(135deg, #FF9800, #f44336);
+        }
+
+        .stat__circle:hover {
+          transform: translateY(-5px);
+        }
+
+        .stat__number {
+          font-size: 2.5rem;
+          font-weight: bold;
+        }
+
+        .stat__unit {
+          font-size: 1.2rem;
+        }
+
+        .stat__icon {
+          position: absolute;
+          bottom: -10px;
+          background: white;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--first-color);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .progress__timeline {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .timeline__line {
+          height: 2px;
+          width: 100px;
+          background: linear-gradient(to right, #f44336, #4CAF50);
+        }
+
+        /* Achievement Cards */
+        .fitness__achievements {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+          margin-bottom: 4rem;
+        }
+
+        .achievement__card {
+          background: var(--container-color);
+          padding: 2rem;
+          border-radius: 1rem;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+          transition: transform 0.3s ease;
+        }
+
+        .achievement__card:hover {
+          transform: translateY(-5px);
+        }
+
+        .achievement__card i {
+          font-size: 2rem;
+          color: var(--first-color);
+          margin-bottom: 1rem;
+        }
+
+        .achievement__card ul {
+          margin-top: 1rem;
+        }
+
+        .achievement__card li {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .achievement__card li i {
+          font-size: 1rem;
+          margin: 0;
+        }
+
+        /* Split Cards */
+        .split__container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+          margin: 2rem 0 4rem;
+        }
+
+        .split__card {
+          background: var(--container-color);
+          border-radius: 1rem;
+          overflow: hidden;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+          transition: transform 0.3s ease;
+        }
+
+        .split__card:hover {
+          transform: translateY(-5px);
+        }
+
+        .card__header {
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          color: white;
+          padding: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .card__content {
+          padding: 1.5rem;
+        }
+
+        .card__content ul {
+          margin-top: 1rem;
+          list-style: none;
+        }
+
+        .card__content li {
+          padding: 0.5rem 0;
+          border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* CTA Button */
+        .fitness__cta {
+          text-align: center;
+        }
+
+        .cta__button {
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          color: white;
+          padding: 1rem 2rem;
+          border-radius: 2rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 1rem;
+          transition: all 0.3s ease;
+        }
+
+        .cta__button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Dark Mode */
+        [data-theme="dark"] .achievement__card,
+        [data-theme="dark"] .split__card {
+          background: var(--container-color-dark);
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+          .fitness__stats {
+            flex-direction: column;
+          }
+
+          .progress__timeline {
+            transform: rotate(90deg);
+          }
+        }
+      </style>
+
+      <!-- Add this after your Fitness section and before any next section -->
+      <section class="history section" id="history">
+          <h2 class="section__title">History of Laderwan</h2>
+          <span class="section__subtitle">A Journey Through Time</span>
+
+          <div class="history__container container">
+              <!-- Introduction -->
+              <div class="history__intro">
+                  <div class="history__content">
+                      <h3 class="history__intro-title">The Village of Heritage</h3>
+                      <p class="history__description">
+                          Laderwan, a picturesque village nestled in Kashmir, carries centuries of rich cultural heritage and historical significance. This serene hamlet has been a witness to the evolution of Kashmiri civilization and continues to preserve its unique traditions.
+                      </p>
+                  </div>
+              </div>
+
+              <!-- Timeline -->
+              <div class="history__timeline">
+                  <h3 class="timeline__title">Historical Timeline</h3>
+                  
+                  <div class="timeline__container">
+                      <div class="timeline__item">
+                          <div class="timeline__content">
+                              <span class="timeline__date">Ancient Era</span>
+                              <h4 class="timeline__subtitle">Early Settlement</h4>
+                              <p>Establishment of the first communities in Laderwan, marking the beginning of its rich history.</p>
+                          </div>
+                      </div>
+
+                      <div class="timeline__item">
+                          <div class="timeline__content">
+                              <span class="timeline__date">Medieval Period</span>
+                              <h4 class="timeline__subtitle">Cultural Development</h4>
+                              <p>Evolution of unique traditions and customs that define Laderwan's cultural identity.</p>
+                          </div>
+                      </div>
+
+                      <div class="timeline__item">
+                          <div class="timeline__content">
+                              <span class="timeline__date">Modern Era</span>
+                              <h4 class="timeline__subtitle">Progress & Preservation</h4>
+                              <p>Balancing modern development while preserving traditional values and heritage.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Cultural Heritage -->
+              <div class="history__heritage">
+                  <h3 class="heritage__title">Cultural Heritage</h3>
+                  <div class="heritage__grid">
+                      <div class="heritage__card">
+                          <i class="fas fa-mosque heritage__icon"></i>
+                          <h4>Religious Heritage</h4>
+                          <p>Ancient mosques and spiritual sites that reflect the village's religious history.</p>
+                      </div>
+
+                      <div class="heritage__card">
+                          <i class="fas fa-hands heritage__icon"></i>
+                          <h4>Traditional Crafts</h4>
+                          <p>Preservation of traditional handicrafts and artisanal skills.</p>
+                      </div>
+
+                      <div class="heritage__card">
+                          <i class="fas fa-seedling heritage__icon"></i>
+                          <h4>Agricultural Legacy</h4>
+                          <p>Time-honored farming practices that sustain the community.</p>
+                      </div>
+
+                      <!-- Add this new card -->
+                      <div class="heritage__card">
+                          <i class="fas fa-book-open heritage__icon"></i>
+                          <h4>Deep Research</h4>
+                          <p>Explore detailed research about Laderwan's history and culture.</p>
+                          <a href="https://drive.google.com/file/d/1hJ8aKYpcQ0P1Y3SDJrxWVpkvRQcp6ctn/view?usp=drivesdk" 
+                             target="_blank" 
+                             class="heritage__link button button--flex button--small">
+                              Read More 
+                              <i class="fas fa-arrow-right button__icon"></i>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <style>
+          /* Add these specific styles to maintain section spacing */
+          .history.section {
+              padding: 6rem 0 2rem;
+              margin-top: 2rem;
+          }
+
+          /* Keep existing history styles but make them more specific */
+          .history .history__container {
+              padding: 2rem 0;
+          }
+
+          /* History Section Styles */
+          .history__container {
+              padding: 2rem 0;
+          }
+
+          .history__intro {
+              text-align: center;
+              margin-bottom: 4rem;
+              padding: 2rem;
+              background: var(--container-color);
+              border-radius: 1rem;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+          }
+
+          .history__intro-title {
+              font-size: 1.5rem;
+              margin-bottom: 1rem;
+              color: var(--title-color);
+          }
+
+          .history__description {
+              line-height: 1.8;
+              color: var(--text-color);
+          }
+
+          /* Timeline Styles */
+          .timeline__title {
+              text-align: center;
+              margin-bottom: 2rem;
+              color: var(--title-color);
+          }
+
+          .timeline__container {
+              position: relative;
+              max-width: 800px;
+              margin: 0 auto;
+              padding: 2rem 0;
+          }
+
+          .timeline__container::after {
+              content: '';
+              position: absolute;
+              width: 2px;
+              background: var(--first-color);
+              top: 0;
+              bottom: 0;
+              left: 50%;
+              margin-left: -1px;
+          }
+
+          .timeline__item {
+              padding: 1rem 2rem;
+              position: relative;
+              width: 50%;
+              box-sizing: border-box;
+          }
+
+          .timeline__item:nth-child(odd) {
+              left: 0;
+          }
+
+          .timeline__item:nth-child(even) {
+              left: 50%;
+          }
+
+          .timeline__content {
+              padding: 1.5rem;
+              background: var(--container-color);
+              border-radius: 0.5rem;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+          }
+
+          .timeline__date {
+              color: var(--first-color);
+              font-weight: 600;
+          }
+
+          .timeline__subtitle {
+              margin: 0.5rem 0;
+              color: var(--title-color);
+          }
+
+          /* Heritage Styles */
+          .history__heritage {
+              margin-top: 4rem;
+          }
+
+          .heritage__title {
+              text-align: center;
+              margin-bottom: 2rem;
+              color: var(--title-color);
+          }
+
+          .heritage__grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 2rem;
+          }
+
+          .heritage__card {
+              text-align: center;
+              padding: 2rem;
+              background: var(--container-color);
+              border-radius: 1rem;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+              transition: transform 0.3s ease;
+          }
+
+          .heritage__card:hover {
+              transform: translateY(-5px);
+          }
+
+          .heritage__icon {
+              font-size: 2rem;
+              color: var(--first-color);
+              margin-bottom: 1rem;
+          }
+
+          /* Responsive */
+          @media screen and (max-width: 768px) {
+              .timeline__container::after {
+                  left: 31px;
+              }
+
+              .timeline__item {
+                  width: 100%;
+                  padding-left: 70px;
+                  padding-right: 25px;
+              }
+
+              .timeline__item:nth-child(even) {
+                  left: 0;
+              }
+          }
+      </style>
+
+      <footer class="footer">
+        <div class="footer__container container">
+          <!-- Footer Top Section -->
+          <div class="footer__top">
+            <div class="footer__content">
+              <h3 class="footer__title">Mussadiq Wani</h3>
+              <p class="footer__description">
+                Full Stack Developer & UI/UX Designer creating innovative web solutions and beautiful user experiences.
+              </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer__content">
+              <h3 class="footer__title">Quick Links</h3>
+              <ul class="footer__links">
+                <li><a href="#home" class="footer__link"><i class="fas fa-chevron-right"></i> Home</a></li>
+                <li><a href="#about" class="footer__link"><i class="fas fa-chevron-right"></i> About</a></li>
+                <li><a href="#skills" class="footer__link"><i class="fas fa-chevron-right"></i> Skills</a></li>
+                <li><a href="#projects" class="footer__link"><i class="fas fa-chevron-right"></i> Projects</a></li>
+                <li><a href="#contact" class="footer__link"><i class="fas fa-chevron-right"></i> Contact</a></li>
+              </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer__content">
+              <h3 class="footer__title">Contact Info</h3>
+              <div class="footer__info">
+                <div class="footer__info-item">
+                  <i class="fas fa-phone"></i>
+                  <span>9906106156</span>
+                </div>
+                <div class="footer__info-item">
+                  <i class="fas fa-envelope"></i>
+                  <span>mussadiqwani19@gmail.com</span>
+                </div>
+                <div class="footer__info-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Jammu & Kashmir, India</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="footer__content">
+              <h3 class="footer__title">Follow Me</h3>
+              <div class="footer__social">
+                <a href="https://github.com/mussadiqwani" target="_blank" class="footer__social-link">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://in.linkedin.com/in/mussadiq-wani-63619226b" target="_blank" class="footer__social-link">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://x.com/mussadiqwani/" target="_blank" class="footer__social-link">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/mussadiq_wanii/" target="_blank" class="footer__social-link">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Bottom -->
+          <div class="footer__bottom">
+            <div class="footer__copy">
+              <p>&#169; Mussadiq Wani. All rights reserved</p>
+            </div>
+            
+            <div class="footer__scroll-up">
+              <a href="#" class="scrollup" id="scroll-up">
+                <i class="fas fa-arrow-up scrollup__icon"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <style>
+        .footer {
+          background-color: var(--container-color);
+          padding: 4rem 0 2rem;
+          margin-top: 6rem;
+        }
+
+        .footer__container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 1rem;
+        }
+
+        .footer__top {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+          margin-bottom: 3rem;
+        }
+
+        .footer__content {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .footer__title {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: var(--title-color);
+          margin-bottom: 1rem;
+          position: relative;
+          padding-bottom: 0.5rem;
+        }
+
+        .footer__title::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 50px;
+          height: 2px;
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+        }
+
+        .footer__description {
+          font-size: 0.938rem;
+          color: var(--text-color);
+          line-height: 1.6;
+        }
+
+        .footer__links {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .footer__link {
+          color: var(--text-color);
+          font-size: 0.938rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          transition: 0.3s;
+        }
+
+        .footer__link:hover {
+          color: var(--first-color);
+          transform: translateX(5px);
+        }
+
+        .footer__info {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .footer__info-item {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          color: var(--text-color);
+          font-size: 0.938rem;
+        }
+
+        .footer__info-item i {
+          color: var(--first-color);
+        }
+
+        .footer__social {
+          display: flex;
+          gap: 1rem;
+        }
+
+        .footer__social-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: var(--first-color-lighter);
+          color: var(--first-color);
+          font-size: 1.25rem;
+          transition: 0.3s;
+        }
+
+        .footer__social-link:hover {
+          background: var(--first-color);
+          color: #fff;
+          transform: translateY(-5px);
+        }
+
+        .footer__bottom {
+          padding-top: 2rem;
+          border-top: 1px solid var(--text-color-light);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+
+        .footer__copy {
+          font-size: 0.875rem;
+          color: var(--text-color);
+        }
+
+        .scrollup {
+          position: fixed;
+          right: 1rem;
+          bottom: -20%;
+          background-color: var(--first-color);
+          padding: 0.5rem;
+          border-radius: 0.4rem;
+          z-index: 10;
+          transition: 0.4s;
+          opacity: 0.8;
+        }
+
+        .scrollup:hover {
+          background-color: var(--first-color-alt);
+          opacity: 1;
+        }
+
+        .scrollup__icon {
+          font-size: 1.5rem;
+          color: #fff;
+        }
+
+        /* Show Scroll Up */
+        .show-scroll {
+          bottom: 5rem;
+        }
+
+        /* Dark mode adjustments */
+        [data-theme="dark"] .footer {
+          background-color: var(--container-color-dark);
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+          .footer__top {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media screen and (max-width: 576px) {
+          .footer__top {
+            grid-template-columns: 1fr;
+          }
+          
+          .footer__bottom {
+            justify-content: center;
+          }
+        }
+      </style>
+
+      <script>
+        // Show scroll up button
+        function scrollUp() {
+          const scrollUp = document.getElementById('scroll-up');
+          if (this.scrollY >= 560) {
+            scrollUp.classList.add('show-scroll');
+          } else {
+            scrollUp.classList.remove('show-scroll');
+          }
+        }
+        window.addEventListener('scroll', scrollUp);
+      </script>
+
+      <script>
+        // Theme change
+        const themeButton = document.getElementById('theme-button');
+        const darkTheme = 'dark-theme';
+        const iconTheme = 'uil-sun';
+
+        // Previously selected topic (if user selected)
+        const selectedTheme = localStorage.getItem('selected-theme');
+        const selectedIcon = localStorage.getItem('selected-icon');
+
+        // Obtain the current theme by validating the dark-theme class
+        const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
+        const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun';
+
+        // Validate if the user previously chose a topic
+        if (selectedTheme) {
+          // If validation is fulfilled, ask what the issue was to know if we activated or deactivated the dark theme
+          document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
+          themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme);
+        }
+
+        // Activate / deactivate the theme manually with the button
+        themeButton.addEventListener('click', () => {
+          // Add or remove the dark / icon theme
+          document.body.classList.toggle(darkTheme);
+          themeButton.classList.toggle(iconTheme);
+          // Save the theme and the current icon that the user chose
+          localStorage.setItem('selected-theme', getCurrentTheme());
+          localStorage.setItem('selected-icon', getCurrentIcon());
+        });
+      </script>
+
+      <script>
+        // Custom Cursor
+        document.addEventListener('DOMContentLoaded', () => {
+          const cursorOuter = document.querySelector('.cursor-outer');
+          const cursorInner = document.querySelector('.cursor-inner');
+
+          document.addEventListener('mousemove', (e) => {
+            cursorOuter.style.left = e.clientX + 'px';
+            cursorOuter.style.top = e.clientY + 'px';
+            cursorInner.style.left = e.clientX + 'px';
+            cursorInner.style.top = e.clientY + 'px';
+          });
+        });
+
+        // Section Visibility
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+          observer.observe(section);
+        });
+      </script>
+    </main>
+
+    <!-- Social Media Floating Buttons -->
+    <div class="social-buttons">
+      <!-- WhatsApp Button -->
+      <a href="https://wa.me/919906106156" class="whatsapp__button" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      
+      <!-- Snapchat Button -->
+      <a href="https://www.snapchat.com/add/mussadiqw21?share_id=o48unXLv8tU&locale=en-GB" class="snapchat__button" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-snapchat-ghost"></i>
+      </a>
+    </div>
+
+    <style>
+      /* Common styles for floating buttons */
+      .social-buttons a {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      /* WhatsApp Button */
+      .whatsapp__button {
+        bottom: 30px;
+        left: 30px;
+        background-color: #25D366;
+        color: white !important;
+      }
+
+      .whatsapp__button:hover {
+        transform: scale(1.1);
+        box-shadow: 2px 2px 15px rgba(37, 211, 102, 0.5);
+      }
+
+      /* Snapchat Button */
+      .snapchat__button {
+        bottom: 30px;
+        right: 30px;
+        background-color: #FFFC00;
+        color: #000 !important;
+      }
+
+      .snapchat__button:hover {
+        transform: scale(1.1);
+        box-shadow: 2px 2px 15px rgba(255, 252, 0, 0.5);
+      }
+
+      /* Responsive */
+      @media screen and (max-width: 768px) {
+        .social-buttons a {
+          width: 50px;
+          height: 50px;
+          font-size: 25px;
+        }
+        
+        .whatsapp__button {
+          bottom: 20px;
+          left: 20px;
+        }
+        
+        .snapchat__button {
+          bottom: 20px;
+          right: 20px;
+        }
+      }
+    </style>
+
+    <div class="cursor-outer"></div>
+    <div class="cursor-inner"></div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const cursorOuter = document.querySelector('.cursor-outer');
+        const cursorInner = document.querySelector('.cursor-inner');
+
+        document.addEventListener('mousemove', (e) => {
+          cursorOuter.style.left = e.clientX + 'px';
+          cursorOuter.style.top = e.clientY + 'px';
+          cursorInner.style.left = e.clientX + 'px';
+          cursorInner.style.top = e.clientY + 'px';
+        });
+      });
+    </script>
+  </body>
+</html>
+
