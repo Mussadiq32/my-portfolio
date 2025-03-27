@@ -331,6 +331,11 @@
           transition: all 0.3s ease;
           cursor: pointer;
           color: var(--title-color);
+          width: 48px;
+          height: 48px;
+          -webkit-tap-highlight-color: transparent;
+          position: relative;
+          z-index: 12;
         }
         
         .nav__toggle:hover {
@@ -339,12 +344,18 @@
           color: var(--first-color);
         }
         
+        .nav__toggle:active {
+          transform: scale(0.95);
+        }
+        
         /* Make hamburger icon more visible */
         .nav__toggle i {
           font-size: 1.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
+          width: 100%;
+          height: 100%;
         }
       }
       
@@ -1154,68 +1165,94 @@
       }
       window.addEventListener('scroll', scrollHeader);
 
-      // Toggle menu
-      const navMenu = document.getElementById('nav-menu'),
-            navToggle = document.getElementById('nav-toggle'),
-            navClose = document.getElementById('nav-close'),
-            navOverlay = document.getElementById('nav-overlay');
-
-      // Show menu
-      if (navToggle) {
-        navToggle.addEventListener('click', () => {
-          navMenu.classList.add('show-menu');
-          navOverlay.classList.add('show-overlay');
-          document.body.style.overflow = 'hidden';
+      // Toggle menu with improved handling
+      document.addEventListener('DOMContentLoaded', function() {
+        const navMenu = document.getElementById('nav-menu');
+        const navToggle = document.getElementById('nav-toggle');
+        const navClose = document.getElementById('nav-close');
+        const navOverlay = document.getElementById('nav-overlay');
+        
+        console.log('Navbar elements:', { 
+          navMenu: navMenu, 
+          navToggle: navToggle, 
+          navClose: navClose, 
+          navOverlay: navOverlay 
         });
-      }
 
-      // Hide menu
-      if (navClose) {
-        navClose.addEventListener('click', () => {
-          navMenu.classList.remove('show-menu');
-          navOverlay.classList.remove('show-overlay');
-          document.body.style.overflow = '';
-        });
-      }
-
-      // Hide menu when clicking on overlay
-      if (navOverlay) {
-        navOverlay.addEventListener('click', () => {
-          navMenu.classList.remove('show-menu');
-          navOverlay.classList.remove('show-overlay');
-          document.body.style.overflow = '';
-        });
-      }
-
-      // Remove menu on link click
-      const navLinks = document.querySelectorAll('.nav__link');
-      function linkAction() {
-        // Remove show-menu class
-        navMenu.classList.remove('show-menu');
-        navOverlay.classList.remove('show-overlay');
-        document.body.style.overflow = '';
-      }
-      navLinks.forEach(link => link.addEventListener('click', linkAction));
-      
-      // Add swipe gesture to close menu on mobile
-      let touchstartX = 0;
-      let touchendX = 0;
-      
-      function checkDirection() {
-        if (touchendX < touchstartX && navMenu.classList.contains('show-menu')) {
-          navMenu.classList.remove('show-menu');
-          navOverlay.classList.remove('show-overlay');
-          document.body.style.overflow = '';
+        // Show menu with improved touch handling
+        if (navToggle) {
+          ['click', 'touchend'].forEach(event => {
+            navToggle.addEventListener(event, (e) => {
+              e.preventDefault();
+              console.log('Toggle menu clicked');
+              navMenu.classList.add('show-menu');
+              navOverlay.classList.add('show-overlay');
+              document.body.style.overflow = 'hidden';
+            }, { passive: false });
+          });
         }
-      }
-      
-      navMenu.addEventListener('touchstart', e => {
-        touchstartX = e.changedTouches[0].screenX;
-      });
-      
-      navMenu.addEventListener('touchend', e => {
-        touchendX = e.changedTouches[0].screenX;
-        checkDirection();
+
+        // Hide menu
+        if (navClose) {
+          ['click', 'touchend'].forEach(event => {
+            navClose.addEventListener(event, (e) => {
+              e.preventDefault();
+              console.log('Close menu clicked');
+              navMenu.classList.remove('show-menu');
+              navOverlay.classList.remove('show-overlay');
+              document.body.style.overflow = '';
+            }, { passive: false });
+          });
+        }
+
+        // Hide menu when clicking on overlay
+        if (navOverlay) {
+          ['click', 'touchend'].forEach(event => {
+            navOverlay.addEventListener(event, (e) => {
+              console.log('Overlay clicked');
+              navMenu.classList.remove('show-menu');
+              navOverlay.classList.remove('show-overlay');
+              document.body.style.overflow = '';
+            });
+          });
+        }
+
+        // Remove menu on link click with improved handling
+        const navLinks = document.querySelectorAll('.nav__link');
+        navLinks.forEach(link => {
+          ['click', 'touchend'].forEach(event => {
+            link.addEventListener(event, () => {
+              console.log('Nav link clicked');
+              navMenu.classList.remove('show-menu');
+              navOverlay.classList.remove('show-overlay');
+              document.body.style.overflow = '';
+            });
+          });
+        });
+        
+        // Add swipe gesture to close menu on mobile with better handling
+        let touchstartX = 0;
+        let touchendX = 0;
+        
+        function checkDirection() {
+          if (touchendX < touchstartX - 50 && navMenu.classList.contains('show-menu')) {
+            console.log('Swipe detected to close menu');
+            navMenu.classList.remove('show-menu');
+            navOverlay.classList.remove('show-overlay');
+            document.body.style.overflow = '';
+          }
+        }
+        
+        if (navMenu) {
+          navMenu.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+          }, { passive: true });
+          
+          navMenu.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            checkDirection();
+          }, { passive: true });
+        }
       });
       
       // Active link highlight
