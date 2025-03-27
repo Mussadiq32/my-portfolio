@@ -1,0 +1,263 @@
+/* Panda follower styles */
+
+.panda-follower {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    z-index: 9999;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    will-change: transform, left, top;
+}
+
+.panda-head {
+    position: relative;
+    width: 70px;
+    height: 65px;
+    background-color: white;
+    border-radius: 50%;
+    overflow: visible;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.panda-ear {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-color: #333;
+    border-radius: 50%;
+    top: -8px;
+    transition: transform 0.3s ease;
+}
+
+.panda-ear-left {
+    left: -5px;
+    transform-origin: bottom right;
+}
+
+.panda-ear-right {
+    right: -5px;
+    transform-origin: bottom left;
+}
+
+/* Ear wiggle on hover */
+.panda-follower.active .panda-ear-left {
+    transform: rotate(-10deg) scale(1.05);
+}
+
+.panda-follower.active .panda-ear-right {
+    transform: rotate(10deg) scale(1.05);
+}
+
+.panda-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panda-eye {
+    position: absolute;
+    width: 20px;
+    height: 24px;
+    background-color: #333;
+    border-radius: 50%;
+    top: 18px;
+    transition: all 0.2s ease;
+}
+
+.panda-eye-left {
+    left: 15px;
+    transform: rotate(-15deg);
+}
+
+.panda-eye-right {
+    right: 15px;
+    transform: rotate(15deg);
+}
+
+.panda-eye::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: white;
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+    animation: eye-shine 3s infinite;
+}
+
+@keyframes eye-shine {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+.panda-blink {
+    height: 3px !important;
+    top: 32px !important;
+}
+
+.panda-nose {
+    position: absolute;
+    width: 14px;
+    height: 9px;
+    background-color: #333;
+    border-radius: 50%;
+    top: 38px;
+    transition: transform 0.2s ease;
+}
+
+.panda-follower.active .panda-nose {
+    transform: scale(1.1);
+}
+
+/* Add cute bamboo stick that appears on click */
+.panda-follower::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 0;
+    background: linear-gradient(to bottom, #7cb342, #558b2f);
+    border-radius: 5px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: height 0.3s ease, opacity 0.3s ease;
+    z-index: -1;
+}
+
+.panda-follower.panda-flip::after {
+    height: 40px;
+    opacity: 1;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .panda-follower {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .panda-head {
+        width: 55px;
+        height: 50px;
+    }
+    
+    .panda-ear {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .panda-eye {
+        width: 16px;
+        height: 20px;
+        top: 15px;
+    }
+    
+    .panda-eye-left {
+        left: 12px;
+    }
+    
+    .panda-eye-right {
+        right: 12px;
+    }
+    
+    .panda-nose {
+        width: 10px;
+        height: 6px;
+        top: 30px;
+    }
+}
+
+/* Animation effects */
+.panda-flip {
+    animation: panda-flip 1s ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes panda-flip {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Theme adaptability */
+[data-theme="dark"] .panda-head {
+    background-color: #f5f5f5;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Add interaction with cursor */
+.panda-follower.active .panda-head {
+    transform: scale(1.1);
+}
+
+/* Scroll animation */
+@keyframes panda-bounce {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-15px);
+    }
+}
+
+.panda-bounce {
+    animation: panda-bounce 0.5s ease-in-out;
+}
+
+/* Add subtle shadow that follows the panda */
+.panda-follower::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: blur(5px);
+    z-index: -1;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.panda-follower.panda-bounce::before {
+    opacity: 0.3;
+    transform: translateX(-50%) scale(0.8);
+}
+
+/* Add mouth that opens on hover */
+.panda-face::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 5px;
+    background-color: #333;
+    border-radius: 50%;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.2s ease;
+}
+
+.panda-follower.active .panda-face::after {
+    height: 8px;
+    width: 14px;
+    border-radius: 50%;
+    background-color: #ff9999;
+} 
