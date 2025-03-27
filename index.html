@@ -1333,6 +1333,176 @@
         }
       }
     </style>
+
+    <style>
+      /* Panda Follower Styles */
+      .panda-follower {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        z-index: 10000;
+        pointer-events: auto;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        will-change: transform;
+        left: 0;
+        top: 0;
+      }
+
+      .panda-message {
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        padding: 8px 12px;
+        border-radius: 15px;
+        font-size: 14px;
+        white-space: nowrap;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 10001;
+      }
+
+      .panda-message::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid white;
+      }
+
+      .panda-follower-head {
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: 50%;
+        position: relative;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .panda-follower:hover .panda-follower-head {
+        transform: scale(1.1);
+      }
+
+      /* Add black patches around eyes */
+      .panda-follower-patches {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .panda-follower-patch {
+        position: absolute;
+        width: 20px;
+        height: 15px;
+        background: #333;
+        border-radius: 50%;
+      }
+
+      .panda-follower-patch.left {
+        top: 25%;
+        left: 15%;
+        transform: rotate(-15deg);
+      }
+
+      .panda-follower-patch.right {
+        top: 25%;
+        right: 15%;
+        transform: rotate(15deg);
+      }
+
+      .panda-follower-face {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .panda-follower-eyes {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #333;
+        border-radius: 50%;
+        top: 40%;
+        left: 25%;
+        animation: blink 4s infinite;
+      }
+
+      .panda-follower-eyes::before {
+        content: '';
+        position: absolute;
+        left: 15px;
+        width: 6px;
+        height: 6px;
+        background: #333;
+        border-radius: 50%;
+      }
+
+      .panda-follower-snout {
+        position: absolute;
+        width: 10px;
+        height: 7px;
+        background: #333;
+        border-radius: 50%;
+        bottom: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      @keyframes blink {
+        0%, 100% { transform: scaleY(1); }
+        95% { transform: scaleY(1); }
+        97.5% { transform: scaleY(0.1); }
+      }
+
+      /* Dark mode support */
+      [data-theme="dark"] .panda-message {
+        background: #333;
+        color: white;
+      }
+
+      [data-theme="dark"] .panda-message::after {
+        border-top-color: #333;
+      }
+
+      [data-theme="dark"] .panda-follower-head {
+        background: #f5f5f5;
+      }
+
+      /* Responsive design */
+      @media screen and (max-width: 768px) {
+        .panda-follower {
+          width: 40px;
+          height: 40px;
+        }
+
+        .panda-message {
+          font-size: 12px;
+          padding: 6px 10px;
+          top: -35px;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .panda-follower {
+          width: 35px;
+          height: 35px;
+        }
+
+        .panda-message {
+          font-size: 11px;
+          padding: 5px 8px;
+          top: -30px;
+        }
+      }
+    </style>
   </head>
 
   <body oncontextmenu="return false">
@@ -5225,6 +5395,138 @@
     </script>
     <script src="assets/swiper-bundle.min.js"></script>
     <script src="assets/panda.js"></script>
+    <script>
+      // Panda follower animation script
+      document.addEventListener('DOMContentLoaded', () => {
+          // Messages for the panda to display
+          const messages = [
+              "Hey! Need help? 👋",
+              "Check out my projects! 🚀",
+              "Let's connect! 🤝",
+              "Scroll up? 🔝",
+              "Having fun? 😊"
+          ];
+
+          // Create panda element
+          const panda = document.createElement('div');
+          panda.className = 'panda-follower';
+
+          // Create message bubble
+          const messageBubble = document.createElement('div');
+          messageBubble.className = 'panda-message';
+          panda.appendChild(messageBubble);
+
+          // Create panda inner elements
+          const pandaHead = document.createElement('div');
+          pandaHead.className = 'panda-follower-head';
+
+          // Create patches
+          const patches = document.createElement('div');
+          patches.className = 'panda-follower-patches';
+          
+          const leftPatch = document.createElement('div');
+          leftPatch.className = 'panda-follower-patch left';
+          
+          const rightPatch = document.createElement('div');
+          rightPatch.className = 'panda-follower-patch right';
+          
+          patches.appendChild(leftPatch);
+          patches.appendChild(rightPatch);
+          pandaHead.appendChild(patches);
+
+          const pandaFace = document.createElement('div');
+          pandaFace.className = 'panda-follower-face';
+
+          const pandaEyes = document.createElement('div');
+          pandaEyes.className = 'panda-follower-eyes';
+
+          const pandaSnout = document.createElement('div');
+          pandaSnout.className = 'panda-follower-snout';
+
+          // Append elements
+          pandaFace.appendChild(pandaEyes);
+          pandaFace.appendChild(pandaSnout);
+          pandaHead.appendChild(pandaFace);
+          panda.appendChild(pandaHead);
+
+          // Add to body
+          document.body.appendChild(panda);
+
+          // Variables for smooth movement
+          let currentX = 0;
+          let currentY = 0;
+          let targetX = 0;
+          let targetY = 0;
+
+          // Update panda position
+          function updatePosition() {
+              currentX += (targetX - currentX) * 0.1;
+              currentY += (targetY - currentY) * 0.1;
+              
+              panda.style.transform = `translate(${currentX}px, ${currentY}px)`;
+              requestAnimationFrame(updatePosition);
+          }
+
+          // Start animation
+          updatePosition();
+
+          // Track mouse movement
+          document.addEventListener('mousemove', (e) => {
+              targetX = e.clientX - panda.offsetWidth / 2;
+              targetY = e.clientY - panda.offsetHeight / 2;
+          });
+
+          // Change messages periodically
+          let messageIndex = 0;
+          function changeMessage() {
+              messageBubble.textContent = messages[messageIndex];
+              messageBubble.style.opacity = '1';
+              
+              setTimeout(() => {
+                  messageBubble.style.opacity = '0';
+              }, 2000);
+
+              messageIndex = (messageIndex + 1) % messages.length;
+          }
+
+          // Start with initial message
+          setTimeout(changeMessage, 1000);
+          setInterval(changeMessage, 3000);
+
+          // Scroll to top functionality
+          panda.addEventListener('click', () => {
+              window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+              });
+              
+              // Show feedback
+              messageBubble.textContent = "Wheee! Going up! 🚀";
+              messageBubble.style.opacity = '1';
+              
+              setTimeout(() => {
+                  messageBubble.style.opacity = '0';
+              }, 2000);
+          });
+
+          // Hide when near other interactive elements
+          document.addEventListener('mouseover', (e) => {
+              if (e.target.closest('a') || e.target.closest('button')) {
+                  panda.style.opacity = '0.3';
+              } else {
+                  panda.style.opacity = '1';
+              }
+          });
+
+          // Check scroll position to update message
+          window.addEventListener('scroll', () => {
+              if (window.scrollY > window.innerHeight) {
+                  messageBubble.textContent = "Scroll up? 🔝";
+                  messageBubble.style.opacity = '1';
+              }
+          });
+      });
+    </script>
   </body>
 </html>
 
