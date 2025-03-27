@@ -1079,6 +1079,207 @@
         }
       }
     </style>
+
+    <style>
+      /* Mobile optimizations for home section */
+      @media screen and (max-width: 768px) {
+        .home__container {
+          padding-top: 5.5rem;
+          row-gap: 2rem;
+        }
+
+        .home__content {
+          grid-template-columns: 1fr !important;
+          padding-top: 0;
+          text-align: center;
+        }
+
+        .home__social {
+          display: flex !important;
+          justify-content: center;
+          column-gap: 1.25rem;
+          margin-bottom: 2rem;
+        }
+
+        .home__social-link {
+          font-size: 1.2rem;
+          width: 45px;
+          height: 45px;
+        }
+
+        .home__title-container {
+          margin-bottom: 1rem;
+        }
+
+        .home__title {
+          font-size: 2.2rem;
+          line-height: 1.4;
+        }
+
+        .greeting {
+          font-size: 1.1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .name {
+          font-size: 2rem;
+        }
+
+        .home__subtitle {
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+        }
+
+        .home__description {
+          font-size: 0.95rem;
+          max-width: 300px;
+          margin: 0 auto 2rem;
+        }
+
+        .home__buttons {
+          justify-content: center;
+          gap: 1rem;
+        }
+
+        .button {
+          padding: 0.75rem 1.4rem;
+          font-size: 0.95rem;
+        }
+
+        /* Adjust panda position for mobile */
+        .panda-3d {
+          position: relative !important;
+          right: 0 !important;
+          top: 0 !important;
+          transform: scale(0.8);
+          margin: 2rem auto;
+        }
+
+        .speech-bubble {
+          top: -40px;
+          left: -20px;
+        }
+
+        .tech-stack {
+          margin-top: 2rem;
+          padding: 1.5rem;
+        }
+
+        .tech-stack__title {
+          font-size: 1.3rem;
+          margin-bottom: 1.25rem;
+        }
+
+        .tech-stack__container {
+          grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+          gap: 1rem;
+        }
+
+        .tech-icon {
+          width: 80px;
+          height: 80px;
+          padding: 1rem;
+        }
+
+        .tech-icon i {
+          font-size: 2rem;
+        }
+
+        .tech-icon span {
+          font-size: 0.75rem;
+        }
+      }
+
+      /* Extra small screen adjustments */
+      @media screen and (max-width: 350px) {
+        .home__container {
+          padding-top: 4.5rem;
+        }
+
+        .home__title {
+          font-size: 1.8rem;
+        }
+
+        .greeting {
+          font-size: 1rem;
+        }
+
+        .name {
+          font-size: 1.7rem;
+        }
+
+        .home__subtitle {
+          font-size: 1.1rem;
+        }
+
+        .home__description {
+          font-size: 0.9rem;
+          max-width: 250px;
+        }
+
+        .home__social-link {
+          width: 40px;
+          height: 40px;
+          font-size: 1.1rem;
+        }
+
+        .panda-3d {
+          transform: scale(0.7);
+        }
+
+        .tech-stack {
+          padding: 1.25rem;
+        }
+
+        .tech-icon {
+          width: 70px;
+          height: 70px;
+        }
+
+        .tech-icon i {
+          font-size: 1.8rem;
+        }
+      }
+
+      /* Very small screens */
+      @media screen and (max-width: 280px) {
+        .home__title {
+          font-size: 1.6rem;
+        }
+
+        .greeting {
+          font-size: 0.9rem;
+        }
+
+        .name {
+          font-size: 1.5rem;
+        }
+
+        .home__subtitle {
+          font-size: 1rem;
+        }
+
+        .home__description {
+          font-size: 0.85rem;
+          max-width: 220px;
+        }
+
+        .home__social-link {
+          width: 35px;
+          height: 35px;
+          font-size: 1rem;
+        }
+
+        .panda-3d {
+          transform: scale(0.6);
+        }
+
+        .button {
+          padding: 0.7rem 1.2rem;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
   </head>
 
   <body oncontextmenu="return false">
