@@ -220,39 +220,61 @@
         
         .nav__menu {
           position: fixed;
-          bottom: -100%;
-          left: 0;
-          width: 100%;
-          background: rgba(255, 255, 255, 0.95);
+          top: 0;
+          right: -100%;
+          height: 100vh;
+          width: 80%;
+          max-width: 400px;
+          background: rgba(255, 255, 255, 0.98);
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
-          padding: 2rem 1.5rem 4rem;
-          box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1);
-          border-radius: 1.5rem 1.5rem 0 0;
-          transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+          padding: 4.5rem 1.5rem 2rem;
+          box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+          transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
           z-index: 10;
+          overflow-y: auto;
         }
 
         [data-theme="dark"] .nav__menu {
-          background: rgba(18, 18, 18, 0.95);
-          box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.2);
+          background: rgba(18, 18, 18, 0.98);
+          box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
         }
 
         .show-menu {
-          bottom: 0;
+          right: 0;
+        }
+        
+        /* Overlay when menu is active */
+        .nav__overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          opacity: 0;
+          visibility: hidden;
+          transition: 0.4s;
+          z-index: 9;
+        }
+        
+        .show-overlay {
+          opacity: 1;
+          visibility: visible;
         }
 
         .nav__list {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          margin-top: 1rem;
         }
         
         .nav__link {
-          flex-direction: column;
-          font-size: 0.85rem;
-          padding: 1.2rem 0.5rem;
-          text-align: center;
+          flex-direction: row;
+          font-size: 1rem;
+          padding: 1rem 0.75rem;
+          text-align: left;
           background: rgba(var(--first-color-rgb), 0.05);
           border-radius: 12px;
           box-shadow: 0 3px 10px rgba(var(--first-color-rgb), 0.05);
@@ -260,19 +282,19 @@
         
         .nav__link:hover {
           background: rgba(var(--first-color-rgb), 0.1);
-          transform: translateY(-5px);
+          transform: translateY(-3px);
           box-shadow: 0 8px 15px rgba(var(--first-color-rgb), 0.1);
         }
         
         .nav__icon {
           font-size: 1.5rem;
-          margin-right: 0;
-          margin-bottom: 0.5rem;
+          margin-right: 0.75rem;
+          margin-bottom: 0;
         }
 
         .active-link {
           background: rgba(var(--first-color-rgb), 0.12);
-          transform: translateY(-5px);
+          transform: translateY(-3px);
           box-shadow: 0 8px 20px rgba(var(--first-color-rgb), 0.15);
         }
 
@@ -315,6 +337,52 @@
           background: rgba(var(--first-color-rgb), 0.15);
           transform: scale(1.1);
           color: var(--first-color);
+        }
+      }
+      
+      /* Small screen adjustments */
+      @media screen and (max-width: 350px) {
+        .nav__menu {
+          padding: 4.5rem 0.5rem 2rem;
+          width: 90%;
+        }
+        
+        .nav__link {
+          padding: 0.75rem 0.5rem;
+        }
+        
+        .nav__icon {
+          font-size: 1.2rem;
+          margin-right: 0.5rem;
+        }
+        
+        .nav__close {
+          top: 0.75rem;
+          right: 1rem;
+        }
+      }
+      
+      /* Extra small screens */
+      @media screen and (max-width: 280px) {
+        .nav__logo {
+          font-size: 1rem;
+        }
+        
+        .nav__menu {
+          width: 100%;
+        }
+        
+        .nav__btns {
+          column-gap: 0.5rem;
+        }
+        
+        .change-theme, .nav__toggle {
+          height: 35px;
+          width: 35px;
+        }
+        
+        .nav__link {
+          font-size: 0.85rem;
         }
       }
 
@@ -1055,6 +1123,7 @@
           </ul>
           <i class="uil uil-times nav__close" id="nav-close"></i>
         </div>
+        <div class="nav__overlay" id="nav-overlay"></div>
         <div class="nav__btns">
           <i class="uil uil-moon change-theme" id="theme-button"></i>
           <div class="nav__toggle" id="nav-toggle">
@@ -1080,12 +1149,15 @@
       // Toggle menu
       const navMenu = document.getElementById('nav-menu'),
             navToggle = document.getElementById('nav-toggle'),
-            navClose = document.getElementById('nav-close');
+            navClose = document.getElementById('nav-close'),
+            navOverlay = document.getElementById('nav-overlay');
 
       // Show menu
       if (navToggle) {
         navToggle.addEventListener('click', () => {
           navMenu.classList.add('show-menu');
+          navOverlay.classList.add('show-overlay');
+          document.body.style.overflow = 'hidden';
         });
       }
 
@@ -1093,6 +1165,17 @@
       if (navClose) {
         navClose.addEventListener('click', () => {
           navMenu.classList.remove('show-menu');
+          navOverlay.classList.remove('show-overlay');
+          document.body.style.overflow = '';
+        });
+      }
+
+      // Hide menu when clicking on overlay
+      if (navOverlay) {
+        navOverlay.addEventListener('click', () => {
+          navMenu.classList.remove('show-menu');
+          navOverlay.classList.remove('show-overlay');
+          document.body.style.overflow = '';
         });
       }
 
@@ -1101,8 +1184,31 @@
       function linkAction() {
         // Remove show-menu class
         navMenu.classList.remove('show-menu');
+        navOverlay.classList.remove('show-overlay');
+        document.body.style.overflow = '';
       }
       navLinks.forEach(link => link.addEventListener('click', linkAction));
+      
+      // Add swipe gesture to close menu on mobile
+      let touchstartX = 0;
+      let touchendX = 0;
+      
+      function checkDirection() {
+        if (touchendX < touchstartX && navMenu.classList.contains('show-menu')) {
+          navMenu.classList.remove('show-menu');
+          navOverlay.classList.remove('show-overlay');
+          document.body.style.overflow = '';
+        }
+      }
+      
+      navMenu.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX;
+      });
+      
+      navMenu.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX;
+        checkDirection();
+      });
       
       // Active link highlight
       function highlightActiveSection() {
@@ -2223,6 +2329,10 @@
           opacity: 0;
           transform: translateY(20px);
           transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+          padding: 0 1rem;
         }
 
         .about__container.visible {
@@ -2240,6 +2350,8 @@
           border-radius: 1.5rem;
           overflow: hidden;
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+          max-width: 400px;
+          margin: 0 auto;
         }
 
         .about__img {
@@ -2269,6 +2381,10 @@
           border-radius: 1.5rem;
           padding: 2rem;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
 
         .about__description-box {
@@ -2313,7 +2429,7 @@
 
         .about__achievements li {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           gap: 0.75rem;
           margin-bottom: 1rem;
           font-size: 1rem;
@@ -2323,6 +2439,8 @@
         .about__achievements i {
           color: var(--first-color);
           font-size: 1.2rem;
+          margin-top: 0.2rem;
+          flex-shrink: 0;
         }
 
         /* Dark mode adjustments */
@@ -2336,13 +2454,86 @@
         }
 
         /* Responsive */
+        @media screen and (max-width: 992px) {
+          .about__container {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+          }
+          
+          .about__img-container {
+            max-width: 350px;
+          }
+        }
+
         @media screen and (max-width: 768px) {
+          .about__container {
+            padding: 0 1rem;
+          }
+          
           .about__content-wrapper {
             padding: 1.5rem;
           }
 
           .about__description-box {
             padding: 1rem;
+            margin-bottom: 1.5rem;
+          }
+          
+          .about__description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+          }
+          
+          .about__achievements li {
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+          }
+        }
+        
+        @media screen and (max-width: 480px) {
+          .about__img-container {
+            max-width: 280px;
+          }
+          
+          .about__content-wrapper {
+            padding: 1.25rem;
+          }
+          
+          .about__description-box {
+            padding: 0.75rem;
+          }
+          
+          .about__description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+          }
+          
+          .highlights__title {
+            font-size: 1.1rem;
+          }
+          
+          .about__achievements li {
+            font-size: 0.9rem;
+            gap: 0.5rem;
+          }
+          
+          .about__achievements i {
+            font-size: 1rem;
+          }
+        }
+        
+        @media screen and (max-width: 350px) {
+          .about__img-container {
+            max-width: 100%;
+          }
+          
+          .about__content-wrapper {
+            padding: 1rem;
+          }
+          
+          .about__description-box {
+            padding: 0.75rem;
+            margin-bottom: 1.25rem;
           }
         }
       </style>
@@ -3985,240 +4176,6 @@
             transform: rotate(90deg);
           }
         }
-      </style>
-
-      <!-- Add this after your Fitness section and before any next section -->
-      <section class="history section" id="history">
-          <h2 class="section__title">History of Laderwan</h2>
-          <span class="section__subtitle">A Journey Through Time</span>
-
-          <div class="history__container container">
-              <!-- Introduction -->
-              <div class="history__intro">
-                  <div class="history__content">
-                      <h3 class="history__intro-title">The Village of Heritage</h3>
-                      <p class="history__description">
-                          Laderwan, a picturesque village nestled in Kashmir, carries centuries of rich cultural heritage and historical significance. This serene hamlet has been a witness to the evolution of Kashmiri civilization and continues to preserve its unique traditions.
-                      </p>
-                  </div>
-              </div>
-
-              <!-- Timeline -->
-              <div class="history__timeline">
-                  <h3 class="timeline__title">Historical Timeline</h3>
-                  
-                  <div class="timeline__container">
-                      <div class="timeline__item">
-                          <div class="timeline__content">
-                              <span class="timeline__date">Ancient Era</span>
-                              <h4 class="timeline__subtitle">Early Settlement</h4>
-                              <p>Establishment of the first communities in Laderwan, marking the beginning of its rich history.</p>
-                          </div>
-                      </div>
-
-                      <div class="timeline__item">
-                          <div class="timeline__content">
-                              <span class="timeline__date">Medieval Period</span>
-                              <h4 class="timeline__subtitle">Cultural Development</h4>
-                              <p>Evolution of unique traditions and customs that define Laderwan's cultural identity.</p>
-                          </div>
-                      </div>
-
-                      <div class="timeline__item">
-                          <div class="timeline__content">
-                              <span class="timeline__date">Modern Era</span>
-                              <h4 class="timeline__subtitle">Progress & Preservation</h4>
-                              <p>Balancing modern development while preserving traditional values and heritage.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-              <!-- Cultural Heritage -->
-              <div class="history__heritage">
-                  <h3 class="heritage__title">Cultural Heritage</h3>
-                  <div class="heritage__grid">
-                      <div class="heritage__card">
-                          <i class="fas fa-mosque heritage__icon"></i>
-                          <h4>Religious Heritage</h4>
-                          <p>Ancient mosques and spiritual sites that reflect the village's religious history.</p>
-                      </div>
-
-                      <div class="heritage__card">
-                          <i class="fas fa-hands heritage__icon"></i>
-                          <h4>Traditional Crafts</h4>
-                          <p>Preservation of traditional handicrafts and artisanal skills.</p>
-                      </div>
-
-                      <div class="heritage__card">
-                          <i class="fas fa-seedling heritage__icon"></i>
-                          <h4>Agricultural Legacy</h4>
-                          <p>Time-honored farming practices that sustain the community.</p>
-                      </div>
-
-                      <!-- Add this new card -->
-                      <div class="heritage__card">
-                          <i class="fas fa-book-open heritage__icon"></i>
-                          <h4>Deep Research</h4>
-                          <p>Explore detailed research about Laderwan's history and culture.</p>
-                          <a href="https://drive.google.com/file/d/1hJ8aKYpcQ0P1Y3SDJrxWVpkvRQcp6ctn/view?usp=drivesdk" 
-                             target="_blank" 
-                             class="heritage__link button button--flex button--small">
-                              Read More 
-                              <i class="fas fa-arrow-right button__icon"></i>
-                          </a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <style>
-          /* Add these specific styles to maintain section spacing */
-          .history.section {
-              padding: 6rem 0 2rem;
-              margin-top: 2rem;
-          }
-
-          /* Keep existing history styles but make them more specific */
-          .history .history__container {
-              padding: 2rem 0;
-          }
-
-          /* History Section Styles */
-          .history__container {
-              padding: 2rem 0;
-          }
-
-          .history__intro {
-              text-align: center;
-              margin-bottom: 4rem;
-              padding: 2rem;
-              background: var(--container-color);
-              border-radius: 1rem;
-              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-          }
-
-          .history__intro-title {
-              font-size: 1.5rem;
-              margin-bottom: 1rem;
-              color: var(--title-color);
-          }
-
-          .history__description {
-              line-height: 1.8;
-              color: var(--text-color);
-          }
-
-          /* Timeline Styles */
-          .timeline__title {
-              text-align: center;
-              margin-bottom: 2rem;
-              color: var(--title-color);
-          }
-
-          .timeline__container {
-              position: relative;
-              max-width: 800px;
-              margin: 0 auto;
-              padding: 2rem 0;
-          }
-
-          .timeline__container::after {
-              content: '';
-              position: absolute;
-              width: 2px;
-              background: var(--first-color);
-              top: 0;
-              bottom: 0;
-              left: 50%;
-              margin-left: -1px;
-          }
-
-          .timeline__item {
-              padding: 1rem 2rem;
-              position: relative;
-              width: 50%;
-              box-sizing: border-box;
-          }
-
-          .timeline__item:nth-child(odd) {
-              left: 0;
-          }
-
-          .timeline__item:nth-child(even) {
-              left: 50%;
-          }
-
-          .timeline__content {
-              padding: 1.5rem;
-              background: var(--container-color);
-              border-radius: 0.5rem;
-              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-          }
-
-          .timeline__date {
-              color: var(--first-color);
-              font-weight: 600;
-          }
-
-          .timeline__subtitle {
-              margin: 0.5rem 0;
-              color: var(--title-color);
-          }
-
-          /* Heritage Styles */
-          .history__heritage {
-              margin-top: 4rem;
-          }
-
-          .heritage__title {
-              text-align: center;
-              margin-bottom: 2rem;
-              color: var(--title-color);
-          }
-
-          .heritage__grid {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-              gap: 2rem;
-          }
-
-          .heritage__card {
-              text-align: center;
-              padding: 2rem;
-              background: var(--container-color);
-              border-radius: 1rem;
-              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-              transition: transform 0.3s ease;
-          }
-
-          .heritage__card:hover {
-              transform: translateY(-5px);
-          }
-
-          .heritage__icon {
-              font-size: 2rem;
-              color: var(--first-color);
-              margin-bottom: 1rem;
-          }
-
-          /* Responsive */
-          @media screen and (max-width: 768px) {
-              .timeline__container::after {
-                  left: 31px;
-              }
-
-              .timeline__item {
-                  width: 100%;
-                  padding-left: 70px;
-                  padding-right: 25px;
-              }
-
-              .timeline__item:nth-child(even) {
-                  left: 0;
-              }
-          }
       </style>
 
       <!-- Contact Me Section -->
