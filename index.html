@@ -221,122 +221,65 @@
         .nav__menu {
           position: fixed;
           top: 0;
-          right: -100%;
+          left: -100%;
           height: 100vh;
-          width: 80%;
-          max-width: 400px;
-          background: rgba(255, 255, 255, 0.98);
-          backdrop-filter: blur(15px);
-          -webkit-backdrop-filter: blur(15px);
-          padding: 4.5rem 1.5rem 2rem;
-          box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-          transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-          z-index: 10;
-          overflow-y: auto;
+          width: 100%;
+          background: #fff;
+          padding: 4rem 2rem;
+          transition: 0.4s ease;
+          z-index: 100;
+          display: flex;
+          flex-direction: column;
         }
 
         [data-theme="dark"] .nav__menu {
-          background: rgba(18, 18, 18, 0.98);
-          box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+          background: var(--body-color-dark);
         }
 
         .show-menu {
-          right: 0;
-        }
-        
-        /* Overlay when menu is active */
-        .nav__overlay {
-          position: fixed;
-          top: 0;
           left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          opacity: 0;
-          visibility: hidden;
-          transition: 0.4s;
-          z-index: 9;
-        }
-        
-        .show-overlay {
-          opacity: 1;
-          visibility: visible;
         }
 
         .nav__list {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 1rem;
-          margin-top: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        
+        .nav__item {
+          width: 100%;
         }
         
         .nav__link {
-          flex-direction: row;
-          font-size: 1rem;
-          padding: 1rem 0.75rem;
-          text-align: left;
-          background: rgba(var(--first-color-rgb), 0.05);
-          border-radius: 12px;
-          box-shadow: 0 3px 10px rgba(var(--first-color-rgb), 0.05);
-        }
-        
-        .nav__link:hover {
-          background: rgba(var(--first-color-rgb), 0.1);
-          transform: translateY(-3px);
-          box-shadow: 0 8px 15px rgba(var(--first-color-rgb), 0.1);
+          display: flex;
+          align-items: center;
+          font-size: 1.2rem;
+          padding: 1rem;
+          width: 100%;
+          color: var(--title-color);
+          transition: 0.3s;
         }
         
         .nav__icon {
           font-size: 1.5rem;
-          margin-right: 0.75rem;
-          margin-bottom: 0;
-        }
-
-        .active-link {
-          background: rgba(var(--first-color-rgb), 0.12);
-          transform: translateY(-3px);
-          box-shadow: 0 8px 20px rgba(var(--first-color-rgb), 0.15);
+          margin-right: 1rem;
         }
 
         .nav__close {
           position: absolute;
           right: 1.5rem;
-          top: 1rem;
+          top: 1.5rem;
           font-size: 1.5rem;
           cursor: pointer;
           color: var(--title-color);
-          transition: all 0.3s ease;
-          display: block;
-          background: rgba(var(--first-color-rgb), 0.1);
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .nav__close:hover {
-          color: var(--first-color);
-          transform: rotate(90deg);
-          background: rgba(var(--first-color-rgb), 0.15);
         }
         
         .nav__toggle {
           display: block;
           font-size: 1.2rem;
-          padding: 0.5rem;
-          border-radius: 50%;
-          background: rgba(var(--first-color-rgb), 0.1);
-          transition: all 0.3s ease;
           cursor: pointer;
           color: var(--title-color);
-        }
-        
-        .nav__toggle:hover {
-          background: rgba(var(--first-color-rgb), 0.15);
-          transform: scale(1.1);
-          color: var(--first-color);
         }
       }
       
@@ -1139,14 +1082,12 @@
         const navMenu = document.getElementById('nav-menu');
         const navToggle = document.getElementById('nav-toggle');
         const navClose = document.getElementById('nav-close');
-        const navOverlay = document.getElementById('nav-overlay');
 
         // Show Menu
         if (navToggle) {
           navToggle.addEventListener('click', function() {
             console.log('Toggle clicked'); // Debug log
             navMenu.classList.add('show-menu');
-            navOverlay.classList.add('show-overlay');
             document.body.style.overflow = 'hidden';
           });
         }
@@ -1156,16 +1097,6 @@
           navClose.addEventListener('click', function() {
             console.log('Close clicked'); // Debug log
             navMenu.classList.remove('show-menu');
-            navOverlay.classList.remove('show-overlay');
-            document.body.style.overflow = '';
-          });
-        }
-
-        // Hide Menu when clicking overlay
-        if (navOverlay) {
-          navOverlay.addEventListener('click', function() {
-            navMenu.classList.remove('show-menu');
-            navOverlay.classList.remove('show-overlay');
             document.body.style.overflow = '';
           });
         }
@@ -1174,7 +1105,6 @@
         const navLinks = document.querySelectorAll('.nav__link');
         function linkAction() {
           navMenu.classList.remove('show-menu');
-          navOverlay.classList.remove('show-overlay');
           document.body.style.overflow = '';
         }
         navLinks.forEach(link => link.addEventListener('click', linkAction));
@@ -1191,7 +1121,6 @@
           touchendX = e.changedTouches[0].screenX;
           if (touchendX < touchstartX) {
             navMenu.classList.remove('show-menu');
-            navOverlay.classList.remove('show-overlay');
             document.body.style.overflow = '';
           }
         });
