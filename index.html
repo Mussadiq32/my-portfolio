@@ -189,6 +189,13 @@
           height: 4.5rem;
           display: flex;
           align-items: center;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        [data-theme="dark"] .header {
+          background: rgba(18, 18, 18, 0.95);
         }
         
         .nav__logo {
@@ -212,6 +219,12 @@
           border-radius: 50%;
           transition: all 0.3s ease;
         }
+
+        [data-theme="dark"] .change-theme,
+        [data-theme="dark"] .nav__toggle {
+          background: rgba(255, 255, 255, 0.08);
+          color: #fff;
+        }
         
         .change-theme:hover,
         .nav__toggle:hover {
@@ -224,16 +237,18 @@
           left: -100%;
           height: 100vh;
           width: 100%;
-          background: #fff;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
           padding: 4rem 2rem;
-          transition: 0.4s ease;
+          transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
           z-index: 100;
           display: flex;
           flex-direction: column;
         }
 
         [data-theme="dark"] .nav__menu {
-          background: var(--body-color-dark);
+          background: rgba(18, 18, 18, 0.98);
         }
 
         .show-menu {
@@ -243,7 +258,7 @@
         .nav__list {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 1.5rem;
           margin-top: 2rem;
         }
         
@@ -254,11 +269,24 @@
         .nav__link {
           display: flex;
           align-items: center;
-          font-size: 1.2rem;
-          padding: 1rem;
+          font-size: 1.1rem;
+          padding: 1rem 1.5rem;
           width: 100%;
           color: var(--title-color);
-          transition: 0.3s;
+          background: rgba(var(--first-color-rgb), 0.05);
+          border-radius: 1rem;
+          transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .nav__link {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav__link:hover,
+        .nav__link.active-link {
+          background: var(--first-color);
+          color: #fff;
+          transform: translateX(8px);
         }
         
         .nav__icon {
@@ -273,6 +301,25 @@
           font-size: 1.5rem;
           cursor: pointer;
           color: var(--title-color);
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: rgba(var(--first-color-rgb), 0.08);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .nav__close {
+          background: rgba(255, 255, 255, 0.08);
+          color: #fff;
+        }
+
+        .nav__close:hover {
+          background: var(--first-color);
+          color: #fff;
+          transform: rotate(90deg);
         }
         
         .nav__toggle {
@@ -281,17 +328,43 @@
           cursor: pointer;
           color: var(--title-color);
         }
+
+        [data-theme="dark"] .nav__toggle {
+          color: #fff;
+        }
       }
       
       /* Small screen adjustments */
       @media screen and (max-width: 350px) {
         .nav__menu {
-          padding: 4.5rem 0.5rem 2rem;
-          width: 90%;
+          padding: 4rem 1.5rem;
         }
         
         .nav__link {
-          padding: 0.75rem 0.5rem;
+          padding: 0.875rem 1.25rem;
+          font-size: 1rem;
+        }
+        
+        .nav__icon {
+          font-size: 1.25rem;
+          margin-right: 0.75rem;
+        }
+        
+        .nav__close {
+          top: 1rem;
+          right: 1rem;
+        }
+      }
+      
+      /* Extra small screens */
+      @media screen and (max-width: 280px) {
+        .nav__menu {
+          padding: 3.5rem 1rem;
+        }
+        
+        .nav__link {
+          padding: 0.75rem 1rem;
+          font-size: 0.95rem;
         }
         
         .nav__icon {
@@ -299,33 +372,12 @@
           margin-right: 0.5rem;
         }
         
+        .change-theme, 
+        .nav__toggle,
         .nav__close {
-          top: 0.75rem;
-          right: 1rem;
-        }
-      }
-      
-      /* Extra small screens */
-      @media screen and (max-width: 280px) {
-        .nav__logo {
-          font-size: 1rem;
-        }
-        
-        .nav__menu {
-          width: 100%;
-        }
-        
-        .nav__btns {
-          column-gap: 0.5rem;
-        }
-        
-        .change-theme, .nav__toggle {
-          height: 35px;
           width: 35px;
-        }
-        
-        .nav__link {
-          font-size: 0.85rem;
+          height: 35px;
+          font-size: 1.1rem;
         }
       }
 
