@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mussadiq Wani's Portfolio</title>
     <link rel="stylesheet" href="assets/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="assets/newcss.css" />
+    <link rel="stylesheet" href="assets/panda.css" />
     <link
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
@@ -219,39 +220,61 @@
         
         .nav__menu {
           position: fixed;
-          bottom: -100%;
-          left: 0;
-          width: 100%;
-          background: rgba(255, 255, 255, 0.95);
+          top: 0;
+          right: -100%;
+          height: 100vh;
+          width: 80%;
+          max-width: 400px;
+          background: rgba(255, 255, 255, 0.98);
           backdrop-filter: blur(15px);
           -webkit-backdrop-filter: blur(15px);
-          padding: 2rem 1.5rem 4rem;
-          box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1);
-          border-radius: 1.5rem 1.5rem 0 0;
-          transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+          padding: 4.5rem 1.5rem 2rem;
+          box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+          transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
           z-index: 10;
+          overflow-y: auto;
         }
 
         [data-theme="dark"] .nav__menu {
-          background: rgba(18, 18, 18, 0.95);
-          box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.2);
+          background: rgba(18, 18, 18, 0.98);
+          box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
         }
 
         .show-menu {
-          bottom: 0;
+          right: 0;
+        }
+        
+        /* Overlay when menu is active */
+        .nav__overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          opacity: 0;
+          visibility: hidden;
+          transition: 0.4s;
+          z-index: 9;
+        }
+        
+        .show-overlay {
+          opacity: 1;
+          visibility: visible;
         }
 
         .nav__list {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          margin-top: 1rem;
         }
         
         .nav__link {
-          flex-direction: column;
-          font-size: 0.85rem;
-          padding: 1.2rem 0.5rem;
-          text-align: center;
+          flex-direction: row;
+          font-size: 1rem;
+          padding: 1rem 0.75rem;
+          text-align: left;
           background: rgba(var(--first-color-rgb), 0.05);
           border-radius: 12px;
           box-shadow: 0 3px 10px rgba(var(--first-color-rgb), 0.05);
@@ -259,19 +282,19 @@
         
         .nav__link:hover {
           background: rgba(var(--first-color-rgb), 0.1);
-          transform: translateY(-5px);
+          transform: translateY(-3px);
           box-shadow: 0 8px 15px rgba(var(--first-color-rgb), 0.1);
         }
         
         .nav__icon {
           font-size: 1.5rem;
-          margin-right: 0;
-          margin-bottom: 0.5rem;
+          margin-right: 0.75rem;
+          margin-bottom: 0;
         }
 
         .active-link {
           background: rgba(var(--first-color-rgb), 0.12);
-          transform: translateY(-5px);
+          transform: translateY(-3px);
           box-shadow: 0 8px 20px rgba(var(--first-color-rgb), 0.15);
         }
 
@@ -314,6 +337,52 @@
           background: rgba(var(--first-color-rgb), 0.15);
           transform: scale(1.1);
           color: var(--first-color);
+        }
+      }
+      
+      /* Small screen adjustments */
+      @media screen and (max-width: 350px) {
+        .nav__menu {
+          padding: 4.5rem 0.5rem 2rem;
+          width: 90%;
+        }
+        
+        .nav__link {
+          padding: 0.75rem 0.5rem;
+        }
+        
+        .nav__icon {
+          font-size: 1.2rem;
+          margin-right: 0.5rem;
+        }
+        
+        .nav__close {
+          top: 0.75rem;
+          right: 1rem;
+        }
+      }
+      
+      /* Extra small screens */
+      @media screen and (max-width: 280px) {
+        .nav__logo {
+          font-size: 1rem;
+        }
+        
+        .nav__menu {
+          width: 100%;
+        }
+        
+        .nav__btns {
+          column-gap: 0.5rem;
+        }
+        
+        .change-theme, .nav__toggle {
+          height: 35px;
+          width: 35px;
+        }
+        
+        .nav__link {
+          font-size: 0.85rem;
         }
       }
 
@@ -1015,73 +1084,6 @@
         }
       }
     </style>
-
-    <style>
-      /* Social Buttons */
-      .social-buttons {
-        position: fixed;
-        z-index: 100;
-      }
-
-      .social-buttons a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        color: white;
-        font-size: 30px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        position: fixed;
-        box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
-      }
-
-      /* WhatsApp Button */
-      .whatsapp__button {
-        bottom: 30px;
-        left: 30px;
-        background-color: #25D366;
-      }
-
-      .whatsapp__button:hover {
-        transform: scale(1.1);
-        box-shadow: 2px 2px 15px rgba(37, 211, 102, 0.5);
-      }
-
-      /* Snapchat Button */
-      .snapchat__button {
-        bottom: 30px;
-        right: 30px;
-        background-color: #FFFC00;
-        color: #000 !important;
-      }
-
-      .snapchat__button:hover {
-        transform: scale(1.1);
-        box-shadow: 2px 2px 15px rgba(255, 252, 0, 0.5);
-      }
-
-      /* Responsive */
-      @media screen and (max-width: 768px) {
-        .social-buttons a {
-          width: 50px;
-          height: 50px;
-          font-size: 25px;
-        }
-        
-        .whatsapp__button {
-          bottom: 20px;
-          left: 20px;
-        }
-        
-        .snapchat__button {
-          bottom: 20px;
-          right: 20px;
-        }
-      }
-    </style>
   </head>
 
   <body oncontextmenu="return false">
@@ -1121,6 +1123,7 @@
           </ul>
           <i class="uil uil-times nav__close" id="nav-close"></i>
         </div>
+        <div class="nav__overlay" id="nav-overlay"></div>
         <div class="nav__btns">
           <i class="uil uil-moon change-theme" id="theme-button"></i>
           <div class="nav__toggle" id="nav-toggle">
@@ -1146,12 +1149,15 @@
       // Toggle menu
       const navMenu = document.getElementById('nav-menu'),
             navToggle = document.getElementById('nav-toggle'),
-            navClose = document.getElementById('nav-close');
+            navClose = document.getElementById('nav-close'),
+            navOverlay = document.getElementById('nav-overlay');
 
       // Show menu
       if (navToggle) {
         navToggle.addEventListener('click', () => {
           navMenu.classList.add('show-menu');
+          navOverlay.classList.add('show-overlay');
+          document.body.style.overflow = 'hidden';
         });
       }
 
@@ -1159,6 +1165,17 @@
       if (navClose) {
         navClose.addEventListener('click', () => {
           navMenu.classList.remove('show-menu');
+          navOverlay.classList.remove('show-overlay');
+          document.body.style.overflow = '';
+        });
+      }
+
+      // Hide menu when clicking on overlay
+      if (navOverlay) {
+        navOverlay.addEventListener('click', () => {
+          navMenu.classList.remove('show-menu');
+          navOverlay.classList.remove('show-overlay');
+          document.body.style.overflow = '';
         });
       }
 
@@ -1167,8 +1184,31 @@
       function linkAction() {
         // Remove show-menu class
         navMenu.classList.remove('show-menu');
+        navOverlay.classList.remove('show-overlay');
+        document.body.style.overflow = '';
       }
       navLinks.forEach(link => link.addEventListener('click', linkAction));
+      
+      // Add swipe gesture to close menu on mobile
+      let touchstartX = 0;
+      let touchendX = 0;
+      
+      function checkDirection() {
+        if (touchendX < touchstartX && navMenu.classList.contains('show-menu')) {
+          navMenu.classList.remove('show-menu');
+          navOverlay.classList.remove('show-overlay');
+          document.body.style.overflow = '';
+        }
+      }
+      
+      navMenu.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX;
+      });
+      
+      navMenu.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX;
+        checkDirection();
+      });
       
       // Active link highlight
       function highlightActiveSection() {
@@ -2289,6 +2329,10 @@
           opacity: 0;
           transform: translateY(20px);
           transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+          padding: 0 1rem;
         }
 
         .about__container.visible {
@@ -2306,6 +2350,8 @@
           border-radius: 1.5rem;
           overflow: hidden;
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+          max-width: 400px;
+          margin: 0 auto;
         }
 
         .about__img {
@@ -2335,6 +2381,10 @@
           border-radius: 1.5rem;
           padding: 2rem;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
 
         .about__description-box {
@@ -2379,7 +2429,7 @@
 
         .about__achievements li {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           gap: 0.75rem;
           margin-bottom: 1rem;
           font-size: 1rem;
@@ -2389,6 +2439,8 @@
         .about__achievements i {
           color: var(--first-color);
           font-size: 1.2rem;
+          margin-top: 0.2rem;
+          flex-shrink: 0;
         }
 
         /* Dark mode adjustments */
@@ -2402,13 +2454,86 @@
         }
 
         /* Responsive */
+        @media screen and (max-width: 992px) {
+          .about__container {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+          }
+          
+          .about__img-container {
+            max-width: 350px;
+          }
+        }
+
         @media screen and (max-width: 768px) {
+          .about__container {
+            padding: 0 1rem;
+          }
+          
           .about__content-wrapper {
             padding: 1.5rem;
           }
 
           .about__description-box {
             padding: 1rem;
+            margin-bottom: 1.5rem;
+          }
+          
+          .about__description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+          }
+          
+          .about__achievements li {
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+          }
+        }
+        
+        @media screen and (max-width: 480px) {
+          .about__img-container {
+            max-width: 280px;
+          }
+          
+          .about__content-wrapper {
+            padding: 1.25rem;
+          }
+          
+          .about__description-box {
+            padding: 0.75rem;
+          }
+          
+          .about__description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+          }
+          
+          .highlights__title {
+            font-size: 1.1rem;
+          }
+          
+          .about__achievements li {
+            font-size: 0.9rem;
+            gap: 0.5rem;
+          }
+          
+          .about__achievements i {
+            font-size: 1rem;
+          }
+        }
+        
+        @media screen and (max-width: 350px) {
+          .about__img-container {
+            max-width: 100%;
+          }
+          
+          .about__content-wrapper {
+            padding: 1rem;
+          }
+          
+          .about__description-box {
+            padding: 0.75rem;
+            margin-bottom: 1.25rem;
           }
         }
       </style>
@@ -2482,8 +2607,94 @@
                   <div class="skills__percentage-bar" style="width: 85%;" data-value="85%"></div>
                   </div>
                 </div>
+
+              <div class="skills__data" title="Build responsive designs with Bootstrap">
+                <div class="skills__name">
+                  <i class="fab fa-bootstrap"></i> Bootstrap
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 90%;" data-value="90%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Create modern UIs with Tailwind CSS">
+                <div class="skills__name">
+                  <i class="fab fa-css3"></i> Tailwind CSS
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 85%;" data-value="85%"></div>
+                  </div>
+                </div>
               </div>
             </div>
+
+          <!-- Frameworks & Libraries -->
+          <div class="skills__content skills__close">
+              <div class="skills__header">
+              <i class="uil uil-layers-alt skills__icon"></i>
+                <div>
+                <h3 class="skills__title">Frameworks & Libraries</h3>
+                <span class="skills__subtitle">Modern Development Frameworks</span>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+            <div class="skills__list">
+              <div class="skills__data" title="Build server-rendered React applications with Next.js">
+                <div class="skills__name">
+                  <i class="fas fa-n"></i> Next.js
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 85%;" data-value="85%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Create progressive web apps with Angular">
+                <div class="skills__name">
+                  <i class="fab fa-angular"></i> Angular
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 75%;" data-value="75%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Develop lightweight applications with Vue.js">
+                <div class="skills__name">
+                  <i class="fab fa-vuejs"></i> Vue.js
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 80%;" data-value="80%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Build full-stack JS apps with MERN stack">
+                <div class="skills__name">
+                  <i class="fas fa-layer-group"></i> MERN Stack
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 90%;" data-value="90%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Creating RESTful APIs with Express.js">
+                <div class="skills__name">
+                  <i class="fab fa-node-js"></i> Express.js
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 85%;" data-value="85%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Build type-safe applications with TypeScript">
+                <div class="skills__name">
+                  <i class="fas fa-code"></i> TypeScript
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 80%;" data-value="80%"></div>
+                  </div>
+                </div>
+            </div>
+          </div>
 
           <!-- Backend Skills -->
             <div class="skills__content skills__close">
@@ -2562,6 +2773,65 @@
             </div>
           </div>
 
+          <!-- App Development -->
+          <div class="skills__content skills__close">
+              <div class="skills__header">
+              <i class="uil uil-mobile-android skills__icon"></i>
+                <div>
+                <h3 class="skills__title">App Development</h3>
+                <span class="skills__subtitle">Mobile & Cross-Platform</span>
+                </div>
+                <i class="uil uil-angle-down skills__arrow"></i>
+              </div>
+              
+            <div class="skills__list">
+              <div class="skills__data" title="Build cross-platform mobile apps with React Native">
+                <div class="skills__name">
+                  <i class="fab fa-react"></i> React Native
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 85%;" data-value="85%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Create cross-platform desktop apps with Electron">
+                <div class="skills__name">
+                  <i class="fas fa-atom"></i> Electron
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 75%;" data-value="75%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Develop native Android applications">
+                <div class="skills__name">
+                  <i class="fab fa-android"></i> Android
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 70%;" data-value="70%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Build cross-platform apps with Flutter">
+                <div class="skills__name">
+                  <i class="fas fa-mobile-alt"></i> Flutter
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 65%;" data-value="65%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Create progressive web applications">
+                <div class="skills__name">
+                  <i class="fas fa-globe"></i> PWA
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 80%;" data-value="80%"></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
           <!-- Tools & Others -->
             <div class="skills__content skills__close">
               <div class="skills__header">
@@ -2616,6 +2886,15 @@
                   </div>
                   <div class="skills__bar">
                   <div class="skills__percentage-bar" style="width: 80%;" data-value="80%"></div>
+                  </div>
+                </div>
+
+              <div class="skills__data" title="Cloud deployment and management">
+                <div class="skills__name">
+                  <i class="fas fa-cloud"></i> Cloud Services
+                  </div>
+                  <div class="skills__bar">
+                  <div class="skills__percentage-bar" style="width: 75%;" data-value="75%"></div>
                   </div>
                 </div>
 
@@ -3086,7 +3365,7 @@
                     <i class="fas fa-code"></i>
                     Source Code
                   </a>
-                  <a href="#" class="project__link">
+                  <a href="https://mussadiqhome.netlify.app/" class="project__link">
                     <i class="fas fa-external-link-alt"></i>
                     Live Demo
                   </a>
@@ -3899,240 +4178,6 @@
         }
       </style>
 
-      <!-- Add this after your Fitness section and before any next section -->
-      <section class="history section" id="history">
-          <h2 class="section__title">History of Laderwan</h2>
-          <span class="section__subtitle">A Journey Through Time</span>
-
-          <div class="history__container container">
-              <!-- Introduction -->
-              <div class="history__intro">
-                  <div class="history__content">
-                      <h3 class="history__intro-title">The Village of Heritage</h3>
-                      <p class="history__description">
-                          Laderwan, a picturesque village nestled in Kashmir, carries centuries of rich cultural heritage and historical significance. This serene hamlet has been a witness to the evolution of Kashmiri civilization and continues to preserve its unique traditions.
-                      </p>
-                  </div>
-              </div>
-
-              <!-- Timeline -->
-              <div class="history__timeline">
-                  <h3 class="timeline__title">Historical Timeline</h3>
-                  
-                  <div class="timeline__container">
-                      <div class="timeline__item">
-                          <div class="timeline__content">
-                              <span class="timeline__date">Ancient Era</span>
-                              <h4 class="timeline__subtitle">Early Settlement</h4>
-                              <p>Establishment of the first communities in Laderwan, marking the beginning of its rich history.</p>
-                          </div>
-                      </div>
-
-                      <div class="timeline__item">
-                          <div class="timeline__content">
-                              <span class="timeline__date">Medieval Period</span>
-                              <h4 class="timeline__subtitle">Cultural Development</h4>
-                              <p>Evolution of unique traditions and customs that define Laderwan's cultural identity.</p>
-                          </div>
-                      </div>
-
-                      <div class="timeline__item">
-                          <div class="timeline__content">
-                              <span class="timeline__date">Modern Era</span>
-                              <h4 class="timeline__subtitle">Progress & Preservation</h4>
-                              <p>Balancing modern development while preserving traditional values and heritage.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-              <!-- Cultural Heritage -->
-              <div class="history__heritage">
-                  <h3 class="heritage__title">Cultural Heritage</h3>
-                  <div class="heritage__grid">
-                      <div class="heritage__card">
-                          <i class="fas fa-mosque heritage__icon"></i>
-                          <h4>Religious Heritage</h4>
-                          <p>Ancient mosques and spiritual sites that reflect the village's religious history.</p>
-                      </div>
-
-                      <div class="heritage__card">
-                          <i class="fas fa-hands heritage__icon"></i>
-                          <h4>Traditional Crafts</h4>
-                          <p>Preservation of traditional handicrafts and artisanal skills.</p>
-                      </div>
-
-                      <div class="heritage__card">
-                          <i class="fas fa-seedling heritage__icon"></i>
-                          <h4>Agricultural Legacy</h4>
-                          <p>Time-honored farming practices that sustain the community.</p>
-                      </div>
-
-                      <!-- Add this new card -->
-                      <div class="heritage__card">
-                          <i class="fas fa-book-open heritage__icon"></i>
-                          <h4>Deep Research</h4>
-                          <p>Explore detailed research about Laderwan's history and culture.</p>
-                          <a href="https://drive.google.com/file/d/1hJ8aKYpcQ0P1Y3SDJrxWVpkvRQcp6ctn/view?usp=drivesdk" 
-                             target="_blank" 
-                             class="heritage__link button button--flex button--small">
-                              Read More 
-                              <i class="fas fa-arrow-right button__icon"></i>
-                          </a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <style>
-          /* Add these specific styles to maintain section spacing */
-          .history.section {
-              padding: 6rem 0 2rem;
-              margin-top: 2rem;
-          }
-
-          /* Keep existing history styles but make them more specific */
-          .history .history__container {
-              padding: 2rem 0;
-          }
-
-          /* History Section Styles */
-          .history__container {
-              padding: 2rem 0;
-          }
-
-          .history__intro {
-              text-align: center;
-              margin-bottom: 4rem;
-              padding: 2rem;
-              background: var(--container-color);
-              border-radius: 1rem;
-              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-          }
-
-          .history__intro-title {
-              font-size: 1.5rem;
-              margin-bottom: 1rem;
-              color: var(--title-color);
-          }
-
-          .history__description {
-              line-height: 1.8;
-              color: var(--text-color);
-          }
-
-          /* Timeline Styles */
-          .timeline__title {
-              text-align: center;
-              margin-bottom: 2rem;
-              color: var(--title-color);
-          }
-
-          .timeline__container {
-              position: relative;
-              max-width: 800px;
-              margin: 0 auto;
-              padding: 2rem 0;
-          }
-
-          .timeline__container::after {
-              content: '';
-              position: absolute;
-              width: 2px;
-              background: var(--first-color);
-              top: 0;
-              bottom: 0;
-              left: 50%;
-              margin-left: -1px;
-          }
-
-          .timeline__item {
-              padding: 1rem 2rem;
-              position: relative;
-              width: 50%;
-              box-sizing: border-box;
-          }
-
-          .timeline__item:nth-child(odd) {
-              left: 0;
-          }
-
-          .timeline__item:nth-child(even) {
-              left: 50%;
-          }
-
-          .timeline__content {
-              padding: 1.5rem;
-              background: var(--container-color);
-              border-radius: 0.5rem;
-              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-          }
-
-          .timeline__date {
-              color: var(--first-color);
-              font-weight: 600;
-          }
-
-          .timeline__subtitle {
-              margin: 0.5rem 0;
-              color: var(--title-color);
-          }
-
-          /* Heritage Styles */
-          .history__heritage {
-              margin-top: 4rem;
-          }
-
-          .heritage__title {
-              text-align: center;
-              margin-bottom: 2rem;
-              color: var(--title-color);
-          }
-
-          .heritage__grid {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-              gap: 2rem;
-          }
-
-          .heritage__card {
-              text-align: center;
-              padding: 2rem;
-              background: var(--container-color);
-              border-radius: 1rem;
-              box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-              transition: transform 0.3s ease;
-          }
-
-          .heritage__card:hover {
-              transform: translateY(-5px);
-          }
-
-          .heritage__icon {
-              font-size: 2rem;
-              color: var(--first-color);
-              margin-bottom: 1rem;
-          }
-
-          /* Responsive */
-          @media screen and (max-width: 768px) {
-              .timeline__container::after {
-                  left: 31px;
-              }
-
-              .timeline__item {
-                  width: 100%;
-                  padding-left: 70px;
-                  padding-right: 25px;
-              }
-
-              .timeline__item:nth-child(even) {
-                  left: 0;
-              }
-          }
-      </style>
-
       <!-- Contact Me Section -->
       <section class="contact section" id="contact">
           <h2 class="section__title">Contact Me</h2>
@@ -4301,25 +4346,37 @@
       </style>
 
       <footer class="footer">
+        <div class="footer__wave-container">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="footer__wave">
+            <path fill="currentColor" fill-opacity="1" d="M0,128L48,149.3C96,171,192,213,288,218.7C384,224,480,192,576,176C672,160,768,160,864,176C960,192,1056,224,1152,218.7C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
+        </div>
         <div class="footer__container container">
           <!-- Footer Top Section -->
           <div class="footer__top">
-            <div class="footer__content">
+            <div class="footer__content footer__about">
               <h3 class="footer__title">Mussadiq Wani</h3>
               <p class="footer__description">
                 Full Stack Developer & UI/UX Designer creating innovative web solutions and beautiful user experiences.
               </p>
+              <div class="footer__newsletter">
+                <h4 class="footer__subtitle">Stay Updated</h4>
+                <div class="footer__newsletter-form">
+                  <input type="email" placeholder="Your email" class="footer__input">
+                  <button class="footer__subscribe-btn">Subscribe</button>
+                </div>
+              </div>
             </div>
 
             <!-- Quick Links -->
             <div class="footer__content">
               <h3 class="footer__title">Quick Links</h3>
               <ul class="footer__links">
-                <li><a href="#home" class="footer__link"><i class="fas fa-chevron-right"></i> Home</a></li>
-                <li><a href="#about" class="footer__link"><i class="fas fa-chevron-right"></i> About</a></li>
-                <li><a href="#skills" class="footer__link"><i class="fas fa-chevron-right"></i> Skills</a></li>
-                <li><a href="#projects" class="footer__link"><i class="fas fa-chevron-right"></i> Projects</a></li>
-                <li><a href="#contact" class="footer__link"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                <li><a href="#home" class="footer__link"><i class="fas fa-chevron-right footer__icon-small"></i> Home</a></li>
+                <li><a href="#about" class="footer__link"><i class="fas fa-chevron-right footer__icon-small"></i> About</a></li>
+                <li><a href="#skills" class="footer__link"><i class="fas fa-chevron-right footer__icon-small"></i> Skills</a></li>
+                <li><a href="#projects" class="footer__link"><i class="fas fa-chevron-right footer__icon-small"></i> Projects</a></li>
+                <li><a href="#contact" class="footer__link"><i class="fas fa-chevron-right footer__icon-small"></i> Contact</a></li>
               </ul>
             </div>
 
@@ -4328,15 +4385,15 @@
               <h3 class="footer__title">Contact Info</h3>
               <div class="footer__info">
                 <div class="footer__info-item">
-                  <i class="fas fa-phone"></i>
+                  <i class="fas fa-phone-alt footer__icon"></i>
                   <span>9906106156</span>
                 </div>
                 <div class="footer__info-item">
-                  <i class="fas fa-envelope"></i>
+                  <i class="fas fa-envelope footer__icon"></i>
                   <span>mussadiqwani19@gmail.com</span>
                 </div>
                 <div class="footer__info-item">
-                  <i class="fas fa-map-marker-alt"></i>
+                  <i class="fas fa-map-marker-alt footer__icon"></i>
                   <span>Zakura, Srinagar</span>
                 </div>
               </div>
@@ -4350,7 +4407,7 @@
                   <i class="fab fa-github"></i>
                 </a>
                 <a href="https://in.linkedin.com/in/mussadiq-wani-63619226b" target="_blank" class="footer__social-link">
-                  <i class="fab fa-linkedin"></i>
+                  <i class="fab fa-linkedin-in"></i>
                 </a>
                 <a href="https://x.com/mussadiqwani/" target="_blank" class="footer__social-link">
                   <i class="fab fa-twitter"></i>
@@ -4365,7 +4422,17 @@
           <!-- Footer Bottom -->
           <div class="footer__bottom">
             <div class="footer__copy">
-              <p>&#169; Mussadiq Wani. All rights reserved</p>
+              <p>
+                <span class="copyright-symbol">©</span>
+                <span class="year" id="current-year">2025</span>
+                <span class="name">Mussadiq Wani</span>
+                <span class="divider"></span>
+                <span class="reserved">All rights reserved</span>
+                <span class="divider"></span>
+                <span class="crafted">Crafted with</span>
+                <i class="fas fa-heart heart"></i>
+                <span class="by-name">by Mussadiq Wani</span>
+              </p>
             </div>
             
             <div class="footer__scroll-up">
@@ -4380,21 +4447,38 @@
       <style>
         .footer {
           background-color: var(--container-color);
-          padding: 4rem 0 2rem;
+          padding: 0 0 1rem;
           margin-top: 6rem;
+          position: relative;
+        }
+
+        .footer__wave-container {
+          position: relative;
+          width: 100%;
+          height: 150px;
+          overflow: hidden;
+          margin-bottom: -5px;
+        }
+
+        .footer__wave {
+          color: var(--container-color);
+          display: block;
         }
 
         .footer__container {
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 1rem;
+          backdrop-filter: blur(8px);
+          border-radius: 16px;
         }
 
         .footer__top {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 2rem;
+          gap: 3rem;
           margin-bottom: 3rem;
+          padding: 2rem 0;
         }
 
         .footer__content {
@@ -4403,13 +4487,17 @@
           gap: 1.5rem;
         }
 
+        .footer__about {
+          padding-right: 2rem;
+        }
+
         .footer__title {
-          font-size: 1.25rem;
-          font-weight: 600;
+          font-size: 1.4rem;
+          font-weight: 700;
           color: var(--title-color);
           margin-bottom: 1rem;
           position: relative;
-          padding-bottom: 0.5rem;
+          padding-bottom: 0.75rem;
         }
 
         .footer__title::after {
@@ -4417,30 +4505,95 @@
           position: absolute;
           left: 0;
           bottom: 0;
-          width: 50px;
-          height: 2px;
+          width: 60px;
+          height: 3px;
           background: linear-gradient(135deg, #4CAF50, #2196F3);
+          border-radius: 3px;
+          transition: width 0.3s ease;
+        }
+
+        .footer__content:hover .footer__title::after {
+          width: 80px;
+        }
+
+        .footer__subtitle {
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: var(--title-color);
         }
 
         .footer__description {
-          font-size: 0.938rem;
+          font-size: 0.95rem;
           color: var(--text-color);
-          line-height: 1.6;
+          line-height: 1.7;
+        }
+
+        .footer__newsletter {
+          margin-top: 1.5rem;
+        }
+
+        .footer__newsletter-form {
+          display: flex;
+          gap: 0.5rem;
+          margin-top: 0.75rem;
+        }
+
+        .footer__input {
+          flex: 1;
+          padding: 0.75rem 1rem;
+          border-radius: 8px;
+          border: 1px solid var(--text-color-light);
+          background: rgba(255, 255, 255, 0.05);
+          color: var(--text-color);
+          font-size: 0.9rem;
+          transition: all 0.3s ease;
+        }
+
+        .footer__input:focus {
+          border-color: var(--first-color);
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .footer__subscribe-btn {
+          padding: 0.75rem 1.5rem;
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .footer__subscribe-btn:hover {
+          background: linear-gradient(135deg, #43A047, #1E88E5);
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
         }
 
         .footer__links {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 0.9rem;
         }
 
         .footer__link {
           color: var(--text-color);
-          font-size: 0.938rem;
+          font-size: 0.95rem;
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          transition: 0.3s;
+          gap: 0.75rem;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          padding: 0.25rem 0;
+        }
+
+        .footer__icon-small {
+          font-size: 0.7rem;
+          transition: transform 0.3s ease;
         }
 
         .footer__link:hover {
@@ -4448,10 +4601,29 @@
           transform: translateX(5px);
         }
 
+        .footer__link:hover .footer__icon-small {
+          transform: translateX(3px);
+        }
+
+        .footer__link::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, var(--first-color), transparent);
+          transition: width 0.4s ease;
+        }
+
+        .footer__link:hover::after {
+          width: 100%;
+        }
+
         .footer__info {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 1.25rem;
         }
 
         .footer__info-item {
@@ -4459,67 +4631,178 @@
           align-items: center;
           gap: 1rem;
           color: var(--text-color);
-          font-size: 0.938rem;
+          font-size: 0.95rem;
+          transition: transform 0.3s ease;
         }
 
-        .footer__info-item i {
+        .footer__info-item:hover {
+          transform: translateX(5px);
+        }
+
+        .footer__icon {
           color: var(--first-color);
+          font-size: 1.1rem;
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(76, 175, 80, 0.1);
+          border-radius: 50%;
+          padding: 1rem;
         }
 
         .footer__social {
           display: flex;
           gap: 1rem;
+          flex-wrap: wrap;
         }
 
         .footer__social-link {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 40px;
-          height: 40px;
+          width: 42px;
+          height: 42px;
           border-radius: 50%;
-          background: var(--first-color-lighter);
+          background: rgba(255, 255, 255, 0.05);
           color: var(--first-color);
-          font-size: 1.25rem;
-          transition: 0.3s;
+          font-size: 1.3rem;
+          transition: all 0.4s ease;
+          border: 1px solid rgba(76, 175, 80, 0.2);
+          position: relative;
+          overflow: hidden;
+          z-index: 1;
+        }
+
+        .footer__social-link::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          border-radius: 50%;
+          z-index: -1;
+          transform: scale(0);
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .footer__social-link:hover {
-          background: var(--first-color);
           color: #fff;
           transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(33, 150, 243, 0.3);
+          border-color: transparent;
+        }
+
+        .footer__social-link:hover::before {
+          transform: scale(1);
         }
 
         .footer__bottom {
           padding-top: 2rem;
-          border-top: 1px solid var(--text-color-light);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           align-items: center;
           flex-wrap: wrap;
-          gap: 1rem;
+          gap: 1.5rem;
+          margin-bottom: 0.5rem;
         }
 
         .footer__copy {
-          font-size: 0.875rem;
+          font-size: 0.95rem;
           color: var(--text-color);
+          text-align: center;
+          width: 100%;
+          position: relative;
+        }
+
+        .footer__copy p {
+          background: rgba(255, 255, 255, 0.03);
+          backdrop-filter: blur(8px);
+          border-radius: 50px;
+          padding: 0.8rem 1.5rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          margin: 0;
+        }
+
+        .footer__copy .copyright-symbol {
+          font-size: 1.3rem;
+          margin-right: 0.2rem;
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-weight: bold;
+        }
+
+        .footer__copy .year {
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .footer__copy .divider {
+          display: inline-block;
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
+          margin: 0 0.5rem;
+        }
+
+        .footer__copy .name {
+          font-weight: 600;
+        }
+
+        .footer__copy .heart {
+          color: #ff5e5e;
+          display: inline-block;
+          font-size: 1.1rem;
+          animation: heartBeat 1.5s infinite;
+          margin: 0 0.3rem;
+        }
+
+        .footer__copy .crafted {
+          opacity: 0.9;
+        }
+
+        @keyframes heartBeat {
+          0% { transform: scale(1); }
+          15% { transform: scale(1.25); }
+          30% { transform: scale(1); }
+          45% { transform: scale(1.25); }
+          60% { transform: scale(1); }
         }
 
         .scrollup {
           position: fixed;
-          right: 1rem;
+          right: 1.5rem;
           bottom: -20%;
           background-color: var(--first-color);
-          padding: 0.5rem;
-          border-radius: 0.4rem;
+          padding: 0.65rem;
+          border-radius: 50%;
           z-index: 10;
-          transition: 0.4s;
-          opacity: 0.8;
+          transition: all 0.4s ease;
+          opacity: 0.9;
+          box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
         }
 
         .scrollup:hover {
-          background-color: var(--first-color-alt);
+          background: linear-gradient(135deg, #4CAF50, #2196F3);
           opacity: 1;
+          transform: translateY(-3px);
         }
 
         .scrollup__icon {
@@ -4537,10 +4820,27 @@
           background-color: var(--container-color-dark);
         }
 
+        [data-theme="dark"] .footer__wave {
+          color: var(--container-color-dark);
+        }
+
+        [data-theme="dark"] .footer__input {
+          background: rgba(0, 0, 0, 0.2);
+          border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="dark"] .footer__bottom {
+          border-color: rgba(255, 255, 255, 0.05);
+        }
+
         /* Responsive */
         @media screen and (max-width: 768px) {
           .footer__top {
             grid-template-columns: repeat(2, 1fr);
+          }
+          
+          .footer__wave-container {
+            height: 100px;
           }
         }
 
@@ -4551,6 +4851,10 @@
           
           .footer__bottom {
             justify-content: center;
+          }
+          
+          .footer__wave-container {
+            height: 70px;
           }
         }
       </style>
@@ -4566,6 +4870,9 @@
           }
         }
         window.addEventListener('scroll', scrollUp);
+        
+        // Set current year in copyright
+        document.getElementById('current-year').textContent = new Date().getFullYear();
       </script>
 
       <script>
@@ -4720,6 +5027,8 @@
         });
       });
     </script>
+    <script src="assets/swiper-bundle.min.js"></script>
+    <script src="assets/panda.js"></script>
   </body>
 </html>
 
